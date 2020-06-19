@@ -19,5 +19,5 @@ body {
 
 /* Main Content */
 .body-content {
-  padding-top: 60px;
+  padding: 60px 10px 10px 10px;
 }

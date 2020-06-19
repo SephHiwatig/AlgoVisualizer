@@ -1,0 +1,47 @@
+.algo-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.algo-info,
+.time-complexity,
+.space-complexity {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  padding: 10px;
+}
+
+.algo-visual {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.complexities {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Media Queries */
+@media (min-width: 1200px) {
+  .algo-container {
+    flex-direction: row;
+  }
+
+  .algo-info {
+    flex: 2;
+  }
+
+  .algo-visual {
+    flex: 8;
+    margin-left: 10px;
+    margin-top: 0;
+  }
+
+  .complexities {
+    flex-direction: row;
+    justify-content: center;
+  }
+}
