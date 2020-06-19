@@ -16,8 +16,17 @@ div span {
 }
 
 .nav-item {
+  text-align: center;
   list-style: none;
   margin: auto 10px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+  min-width: 75px;
+}
+
+.nav-item:hover {
+  background-color: #e91e63;
 }
 
 /* tablet/mobile menu */
@@ -26,13 +35,28 @@ div span {
   cursor: pointer;
 }
 
-.nav-menu-btn:hover {
+.btn-wrapper:hover {
   transform: scale(1.1);
   transition: ease-in-out 0.2s;
 }
 
 .nav-menu-mobile {
+  background-color: #1976d2;
+  color: white;
+  position: absolute;
+  top: 60px;
+  width: 100%;
+  border-top: 1px solid lightgray;
   display: none;
+}
+.nav-menu-mobile div {
+  width: 100%;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.nav-menu-mobile div:hover {
+  background-color: #218dfa;
 }
 
 /* Media Queries */
@@ -46,7 +70,7 @@ div span {
   }
 
   .nav-menu-list {
-    flex: 9;
+    flex: 8;
   }
 
   .nav-title {

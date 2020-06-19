@@ -11,10 +11,17 @@
 </div>
 
 <div class="nav-menu-btn">
-  <div class="btn-wrapper"><img src="../../assets/menu.svg" alt="logo" /></div>
-  <div class="nav-menu-mobile">
-    <div class="nav-item-mobile">Sort</div>
-    <div class="nav-item-mobile">Search</div>
-    <div class="nav-item-mobile">Path Finding</div>
+  <div class="btn-wrapper">
+    <img
+      src="../../assets/menu.svg"
+      alt="logo"
+      (click)="onToggleMobileMenu()"
+    />
   </div>
+</div>
+
+<div class="nav-menu-mobile">
+  <div class="nav-item-mobile">Sort</div>
+  <div class="nav-item-mobile">Search</div>
+  <div class="nav-item-mobile">Path Finding</div>
 </div>
