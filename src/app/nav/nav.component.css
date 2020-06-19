@@ -43,6 +43,8 @@ div span {
   display: block;
   padding: 10px;
   border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
 }
 
 .sub-menu-sort a:hover,
@@ -55,6 +57,10 @@ div span {
 .nav-item-sort:hover,
 .nav-item-search:hover,
 .nav-item-path:hover {
+  background-color: #e91e63;
+}
+
+.active-link {
   background-color: #e91e63;
 }
 

@@ -4,16 +4,16 @@
 
 <div class="nav-menu-list">
   <ul class="nav-list">
-    <li class="nav-item-sort">
+    <li class="nav-item-sort" routerLinkActive="active-link">
       Sort
       <div class="sub-menu-sort">
-        <a>Selection Sort</a>
-        <a>Bubble Sort</a>
-        <a>Insertion Sort</a>
-        <a>Quick Sort</a>
+        <a routerLink="/sort/selection">Selection Sort</a>
+        <a routerLink="/sort/bubble">Bubble Sort</a>
+        <a routerLink="/sort/insertion">Insertion Sort</a>
+        <a routerLink="/sort/quick">Quick Sort</a>
       </div>
     </li>
-    <li class="nav-item-search">
+    <li class="nav-item-search" routerLinkActive="active-link">
       Search
       <div class="sub-menu-search">
         <a>Linear Search</a>
@@ -21,7 +21,7 @@
         <a>Jump Search</a>
       </div>
     </li>
-    <li class="nav-item-path">
+    <li class="nav-item-path" routerLinkActive="active-link">
       Path Finding
       <div class="sub-menu-path">
         <a>Dijsktra</a>
