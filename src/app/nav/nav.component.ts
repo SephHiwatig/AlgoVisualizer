@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 
 @Component({
   selector: "app-nav",
@@ -6,7 +7,7 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./nav.component.css"],
 })
 export class NavComponent implements OnInit {
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit() {
     // Hide the dropdown menu for mobile when window is desktop size
@@ -21,11 +22,17 @@ export class NavComponent implements OnInit {
 
   // Dropdown menu toggler for mobile
   onToggleMobileMenu() {
-    let menu = <HTMLElement>document.querySelector(".nav-menu-mobile");
+    const menu = <HTMLElement>document.querySelector(".nav-menu-mobile");
     if (menu.style.display !== "block") {
       menu.style.display = "block";
     } else {
       menu.style.display = "none";
     }
+  }
+
+  onMobileNavigate(route) {
+    this.router.navigate([route]);
+    const menu = <HTMLElement>document.querySelector(".nav-menu-mobile");
+    menu.style.display = "none";
   }
 }

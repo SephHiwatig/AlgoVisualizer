@@ -16,16 +16,16 @@
     <li class="nav-item-search" routerLinkActive="active-link">
       Search
       <div class="sub-menu-search">
-        <a>Linear Search</a>
-        <a>Binary Search</a>
-        <a>Jump Search</a>
+        <a routerLink="/search/linear">Linear Search</a>
+        <a routerLink="/search/binary">Binary Search</a>
+        <a routerLink="/search/jump">Jump Search</a>
       </div>
     </li>
     <li class="nav-item-path" routerLinkActive="active-link">
       Path Finding
       <div class="sub-menu-path">
-        <a>Dijsktra</a>
-        <a>A*</a>
+        <a routerLink="/path/dijkstra">Dijsktra</a>
+        <a routerLink="/path/astar">A*</a>
       </div>
     </li>
   </ul>
@@ -44,20 +44,38 @@
 <div class="nav-menu-mobile">
   <div class="nav-item-mobile">
     Sort
-    <div class="sub-menu-mobile">Selection Sort</div>
-    <div class="sub-menu-mobile">Bubble Sort</div>
-    <div class="sub-menu-mobile">Insertion Sort</div>
-    <div class="sub-menu-mobile">Quick Sort</div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/sort/selection')">
+      Selection Sort
+    </div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/sort/bubble')">
+      Bubble Sort
+    </div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/sort/insertion')">
+      Insertion Sort
+    </div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/sort/quick')">
+      Quick Sort
+    </div>
   </div>
   <div class="nav-item-mobile">
     Search
-    <div class="sub-menu-mobile">Linear Search</div>
-    <div class="sub-menu-mobile">Binary Search</div>
-    <div class="sub-menu-mobile">Jump Search</div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/search/linear')">
+      Linear Search
+    </div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/search/binary')">
+      Binary Search
+    </div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/search/jump')">
+      Jump Search
+    </div>
   </div>
   <div class="nav-item-mobile">
     Path Finding
-    <div class="sub-menu-mobile">Dijkstra</div>
-    <div class="sub-menu-mobile">A*</div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/path/dijkstra')">
+      Dijkstra
+    </div>
+    <div class="sub-menu-mobile" (click)="onMobileNavigate('/path/astar')">
+      A*
+    </div>
   </div>
 </div>
