@@ -16,12 +16,30 @@
   background-color: rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   margin-top: 10px;
+  min-height: 400px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  position: relative;
 }
 
 .complexities {
   margin-top: 10px;
   display: flex;
   flex-direction: column;
+}
+
+.time-complexity,
+.space-complexity {
+  width: 100%;
+}
+
+.time-complexity {
+  margin-right: 0;
+}
+
+.space-complexity {
+  margin-left: 0;
 }
 
 /* Media Queries */
@@ -43,5 +61,14 @@
   .complexities {
     flex-direction: row;
     justify-content: center;
+    min-height: 380px;
+  }
+
+  .time-complexity {
+    margin-right: 5px;
+  }
+
+  .space-complexity {
+    margin-left: 5px;
   }
 }
