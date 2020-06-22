@@ -89,10 +89,10 @@
   }
 
   .time-complexity {
-    margin-right: 5px;
+    margin-left: 5px;
   }
 
   .space-complexity {
-    margin-left: 5px;
+    margin-right: 5px;
   }
 }
