@@ -8,6 +8,8 @@ export class SortService {
 
   constructor() {}
 
+  // Repopulate the arrayToSort variable
+  // with random values
   populateArray() {
     this.arrayToSort = [];
     for (let i = 0; i < 100; i++) {
@@ -15,26 +17,32 @@ export class SortService {
     }
   }
 
+  // Sorts the array with Selection Sort Algorithm
   onSelectionSort() {
     let barCount = this.arrayToSort.length;
-
+    // loop thorugh the length of the array to be sorted
+    // setTimeouts are used to show the animation on screen
     for (let i = 0; i < barCount - 1; i++) {
       setTimeout(() => {
+        // the current index i will be treated as the lowest value
         let minIndex = i;
-        // let currentBarToCheck = allBars[minIndex] as HTMLElement;
-        // currentBarToCheck.style.backgroundColor = "red";
+
         setTimeout(() => {
+          // Compare each value after minIndex to value of minIndex
+          // if value of minIndex is greater than the value to be compared
+          // changed the minIndex to the index of the value to be compared (Confusing @.@)
           for (let j = i + 1; j < barCount; j++) {
             if (this.arrayToSort[j] < this.arrayToSort[minIndex]) {
               minIndex = j;
             }
           }
+          // swap the value of the minIndex to the value of current i
           let temp = this.arrayToSort[minIndex];
           this.arrayToSort[minIndex] = this.arrayToSort[i];
           this.arrayToSort[i] = temp;
           this.generateBars("selection");
-        }, i * 110);
-      }, i * 100);
+        }, i * 60);
+      }, i * 50);
     }
   }
 
@@ -58,6 +66,7 @@ export class SortService {
     sortButton.style.padding = "10px";
     sortButton.style.borderRadius = "4px";
     sortButton.style.cursor = "pointer";
+    // Determine the type of sort that the button will execute
     switch (sortType) {
       case "selection": {
         sortButton.addEventListener("click", () => {
