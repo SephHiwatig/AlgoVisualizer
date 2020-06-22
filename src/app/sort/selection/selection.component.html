@@ -36,5 +36,29 @@
       style="width: 100%; height: 100%;"
     ></iframe>
   </div>
-  <div class="space-complexity"></div>
+  <div class="space-complexity">
+    <div class="language-menu">
+      <div
+        class="language"
+        id="cplusplus"
+        (click)="onLanguageSelect('cplusplus')"
+      >
+        C++
+      </div>
+      <div class="language" id="c" (click)="onLanguageSelect('c')">C</div>
+      <div class="language" id="python" (click)="onLanguageSelect('python')">
+        Python
+      </div>
+      <div class="language" id="java" (click)="onLanguageSelect('java')">
+        Java
+      </div>
+      <div class="language" id="csharp" (click)="onLanguageSelect('csharp')">
+        C#
+      </div>
+      <div class="language" id="php" (click)="onLanguageSelect('php')">PHP</div>
+    </div>
+    <div class="code-img-wrapper">
+      <img src="{{ languageUrl }}" alt="code-snippet" />
+    </div>
+  </div>
 </section>
