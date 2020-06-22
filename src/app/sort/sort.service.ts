@@ -46,6 +46,25 @@ export class SortService {
     }
   }
 
+  onBubbleSort() {
+    console.log("executing bubble");
+    let barCount = this.arrayToSort.length;
+    for (let i = 0; i < barCount - 1; i++) {
+      setTimeout(() => {
+        for (let j = 0; j < barCount - i - 1; j++) {
+          setTimeout(() => {
+            if (this.arrayToSort[j] > this.arrayToSort[j + 1]) {
+              let temp = this.arrayToSort[j];
+              this.arrayToSort[j] = this.arrayToSort[j + 1];
+              this.arrayToSort[j + 1] = temp;
+              this.generateBars("bubble");
+            }
+          }, i * 30);
+        }
+      }, i * 20);
+    }
+  }
+
   generateBars(sortType) {
     // get the element that will contain the algorithm animation
     const visualContainer = document.querySelector(
@@ -69,9 +88,11 @@ export class SortService {
     // Determine the type of sort that the button will execute
     switch (sortType) {
       case "selection": {
-        sortButton.addEventListener("click", () => {
-          this.onSelectionSort();
-        });
+        sortButton.addEventListener("click", this.onSelectionSort.bind(this));
+        break;
+      }
+      case "bubble": {
+        sortButton.addEventListener("click", this.onBubbleSort.bind(this));
         break;
       }
     }

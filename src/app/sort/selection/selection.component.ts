@@ -4,7 +4,7 @@ import { SortService } from "../sort.service";
 @Component({
   selector: "app-selection",
   templateUrl: "./selection.component.html",
-  styleUrls: ["./selection.component.css"],
+  styleUrls: ["./selection.component.css", "../sort.style.css"],
 })
 export class SelectionComponent implements OnInit {
   languageUrl = "../../../assets/sample_code/sort/selection/cplusplus.PNG";
