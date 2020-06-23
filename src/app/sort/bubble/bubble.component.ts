@@ -6,13 +6,17 @@ import { SortService } from "../sort.service";
   templateUrl: "./bubble.component.html",
   styleUrls: ["./bubble.component.css", "../sort.style.css"],
 })
-export class BubbleComponent implements OnInit, AfterViewInit {
+export class BubbleComponent implements OnInit {
   constructor(private sortService: SortService) {}
+  languageUrl = "";
 
-  ngOnInit() {}
-
-  ngAfterViewInit() {
+  ngOnInit() {
     this.sortService.populateArray();
     this.sortService.generateBars("bubble");
+    this.languageUrl = this.sortService.languageSelect("cplusplus", "bubble");
+  }
+
+  onLanguageSelect(language) {
+    this.languageUrl = this.sortService.languageSelect(language, "bubble");
   }
 }

@@ -78,9 +78,9 @@
 
   .algo-info {
     flex: 2;
-    height: calc(100vh - 100px);
     overflow-x: hidden;
     overflow-y: auto;
+    height: calc(100vh - 100px);
   }
 
   .algo-visual {

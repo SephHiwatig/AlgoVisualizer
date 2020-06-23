@@ -12,7 +12,7 @@ export class SortService {
   // with random values
   populateArray() {
     this.arrayToSort = [];
-    for (let i = 0; i < 75; i++) {
+    for (let i = 0; i < 100; i++) {
       this.arrayToSort.push(Math.ceil(Math.random() * 100));
     }
   }
@@ -46,13 +46,17 @@ export class SortService {
     }
   }
 
+  // Sorts the array with Bubble Sort Algorithm
   onBubbleSort() {
-    console.log("executing bubble");
     let barCount = this.arrayToSort.length;
+    // Loop through the whole array once
     for (let i = 0; i < barCount - 1; i++) {
       setTimeout(() => {
+        // within its iteration of the outer loop, through the array again starting from index 0 always until
+        // length of the array minus the current value of i to avoid sorting the last part (already sorted, biggest values are pushed to the end)
         for (let j = 0; j < barCount - i - 1; j++) {
           setTimeout(() => {
+            // Compare the value of current index j to the one next to it and swap if value of current index j is greater than the next value
             if (this.arrayToSort[j] > this.arrayToSort[j + 1]) {
               let temp = this.arrayToSort[j];
               this.arrayToSort[j] = this.arrayToSort[j + 1];
@@ -110,5 +114,58 @@ export class SortService {
       bar.setAttribute("class", "bar");
       visualContainer.appendChild(bar);
     });
+  }
+
+  languageSelect(language, sortType) {
+    let languageUrl = "";
+    let languages = document.querySelectorAll(".language");
+    languages.forEach((language) => {
+      (language as HTMLElement).style.borderBottom = "none";
+    });
+
+    switch (language) {
+      case "cplusplus": {
+        languageUrl =
+          "../../../assets/sample_code/sort/" + sortType + "/cplusplus.PNG";
+        let el = document.querySelector("#cplusplus") as HTMLElement;
+        el.style.borderBottom = "4px solid #3f51b5";
+        break;
+      }
+      case "c": {
+        languageUrl = "../../../assets/sample_code/sort/" + sortType + "/c.PNG";
+        let el = document.querySelector("#c") as HTMLElement;
+        el.style.borderBottom = "4px solid #3f51b5";
+        break;
+      }
+      case "python": {
+        languageUrl =
+          "../../../assets/sample_code/sort/" + sortType + "/python.PNG";
+        let el = document.querySelector("#python") as HTMLElement;
+        el.style.borderBottom = "4px solid #3f51b5";
+        break;
+      }
+      case "java": {
+        languageUrl =
+          "../../../assets/sample_code/sort/" + sortType + "/java.PNG";
+        let el = document.querySelector("#java") as HTMLElement;
+        el.style.borderBottom = "4px solid #3f51b5";
+        break;
+      }
+      case "csharp": {
+        languageUrl =
+          "../../../assets/sample_code/sort/" + sortType + "/csharp.PNG";
+        let el = document.querySelector("#csharp") as HTMLElement;
+        el.style.borderBottom = "4px solid #3f51b5";
+        break;
+      }
+      case "php": {
+        languageUrl =
+          "../../../assets/sample_code/sort/" + sortType + "/php.PNG";
+        let el = document.querySelector("#php") as HTMLElement;
+        el.style.borderBottom = "4px solid #3f51b5";
+        break;
+      }
+    }
+    return languageUrl;
   }
 }
