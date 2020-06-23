@@ -175,9 +175,10 @@ export class SortService {
       const bar = document.createElement("div");
       bar.style.height =
         Math.floor((size / 100) * visualContainer.clientHeight) + "px";
-      bar.style.width = "10px";
-      bar.style.marginLeft = "2px";
-      bar.style.marginRight = "2px";
+      let width = Math.ceil((visualContainer.clientWidth - 200) / 100);
+      bar.style.width = width + "px";
+      bar.style.marginLeft = "1px";
+      bar.style.marginRight = "1px";
       bar.style.backgroundColor = "#428df5";
       bar.setAttribute("class", "bar");
       visualContainer.appendChild(bar);
