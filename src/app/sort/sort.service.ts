@@ -5,6 +5,7 @@ import { Injectable } from "@angular/core";
 })
 export class SortService {
   arrayToSort = [];
+  timeOuts = [];
 
   constructor() {}
 
@@ -19,114 +20,111 @@ export class SortService {
 
   // Sorts the array with Selection Sort Algorithm
   onSelectionSort() {
+    this.timeOuts = [];
     let barCount = this.arrayToSort.length;
     // loop thorugh the length of the array to be sorted
     // setTimeouts are used to show the animation on screen
     for (let i = 0; i < barCount - 1; i++) {
-      setTimeout(() => {
-        // the current index i will be treated as the lowest value
-        let minIndex = i;
+      this.timeOuts.push(
+        setTimeout(() => {
+          // the current index i will be treated as the lowest value
+          let minIndex = i;
 
-        // Compare each value after minIndex to value of minIndex
-        // if value of minIndex is greater than the value to be compared
-        // changed the minIndex to the index of the value to be compared (Confusing @.@)
-        for (let j = i + 1; j < barCount; j++) {
-          if (this.arrayToSort[j] < this.arrayToSort[minIndex]) {
-            minIndex = j;
+          // Compare each value after minIndex to value of minIndex
+          // if value of minIndex is greater than the value to be compared
+          // changed the minIndex to the index of the value to be compared (Confusing @.@)
+          for (let j = i + 1; j < barCount; j++) {
+            if (this.arrayToSort[j] < this.arrayToSort[minIndex]) {
+              minIndex = j;
+            }
           }
-        }
-        // swap the value of the minIndex to the value of current i
-        let temp = this.arrayToSort[minIndex];
-        this.arrayToSort[minIndex] = this.arrayToSort[i];
-        this.arrayToSort[i] = temp;
-        this.generateBars("selection");
-      }, i * 50);
+          // swap the value of the minIndex to the value of current i
+          let temp = this.arrayToSort[minIndex];
+          this.arrayToSort[minIndex] = this.arrayToSort[i];
+          this.arrayToSort[i] = temp;
+          this.generateBars("selection");
+        }, i * 50)
+      );
     }
   }
 
   // Sorts the array with Bubble Sort Algorithm
   onBubbleSort() {
+    this.timeOuts = [];
     let barCount = this.arrayToSort.length;
     // Loop through the whole array once
     for (let i = 0; i < barCount - 1; i++) {
-      setTimeout(() => {
-        // within its iteration of the outer loop, through the array again starting from index 0 always until
-        // length of the array minus the current value of i to avoid sorting the last part (already sorted, biggest values are pushed to the end)
-        for (let j = 0; j < barCount - i - 1; j++) {
-          setTimeout(() => {
-            // Compare the value of current index j to the one next to it and swap if value of current index j is greater than the next value
-            if (this.arrayToSort[j] > this.arrayToSort[j + 1]) {
-              let temp = this.arrayToSort[j];
-              this.arrayToSort[j] = this.arrayToSort[j + 1];
-              this.arrayToSort[j + 1] = temp;
-              this.generateBars("bubble");
-            }
-          }, i * 2);
-        }
-      }, i);
+      this.timeOuts.push(
+        setTimeout(() => {
+          // within its iteration of the outer loop, through the array again starting from index 0 always until
+          // length of the array minus the current value of i to avoid sorting the last part (already sorted, biggest values are pushed to the end)
+          for (let j = 0; j < barCount - i - 1; j++) {
+            this.timeOuts.push(
+              setTimeout(() => {
+                // Compare the value of current index j to the one next to it and swap if value of current index j is greater than the next value
+                if (this.arrayToSort[j] > this.arrayToSort[j + 1]) {
+                  let temp = this.arrayToSort[j];
+                  this.arrayToSort[j] = this.arrayToSort[j + 1];
+                  this.arrayToSort[j + 1] = temp;
+                  this.generateBars("bubble");
+                }
+              }, i * 2)
+            );
+          }
+        }, i)
+      );
     }
   }
 
   onInsertionSort() {
+    this.timeOuts = [];
     let barCount = this.arrayToSort.length;
     for (let i = 1; i < barCount; i++) {
-      setTimeout(() => {
-        let key = this.arrayToSort[i];
-        let j = i - 1;
+      this.timeOuts.push(
+        setTimeout(() => {
+          let key = this.arrayToSort[i];
+          let j = i - 1;
 
-        while (j >= 0 && this.arrayToSort[j] > key) {
-          this.arrayToSort[j + 1] = this.arrayToSort[j];
-          j -= 1;
+          while (j >= 0 && this.arrayToSort[j] > key) {
+            this.arrayToSort[j + 1] = this.arrayToSort[j];
+            j -= 1;
+            this.generateBars("insertion");
+          }
+          this.arrayToSort[j + 1] = key;
           this.generateBars("insertion");
-        }
-        this.arrayToSort[j + 1] = key;
-        this.generateBars("insertion");
-      }, i);
+        }, i)
+      );
     }
   }
 
   onQuickSort(low: number, high: number) {
-    setTimeout(() => {
-      if (low < high) {
-        let pivot = this.arrayToSort[high];
-        let i = low - 1;
-        for (var j = low; j < high; j++) {
-          if (this.arrayToSort[j] < pivot) {
-            i++;
-            let temp = this.arrayToSort[i];
-            this.arrayToSort[i] = this.arrayToSort[j];
-            this.arrayToSort[j] = temp;
-            this.generateBars("quick");
+    this.timeOuts = [];
+    this.timeOuts.push(
+      setTimeout(() => {
+        if (low < high) {
+          let pivot = this.arrayToSort[high];
+          let i = low - 1;
+          for (var j = low; j < high; j++) {
+            if (this.arrayToSort[j] < pivot) {
+              i++;
+              let temp = this.arrayToSort[i];
+              this.arrayToSort[i] = this.arrayToSort[j];
+              this.arrayToSort[j] = temp;
+              this.generateBars("quick");
+            }
           }
+          let temp1 = this.arrayToSort[i + 1];
+          this.arrayToSort[i + 1] = this.arrayToSort[high];
+          this.arrayToSort[high] = temp1;
+          this.generateBars("quick");
+          i = i + 1;
+
+          this.onQuickSort(low, i - 1);
+          this.onQuickSort(i + 1, high);
         }
-        let temp1 = this.arrayToSort[i + 1];
-        this.arrayToSort[i + 1] = this.arrayToSort[high];
-        this.arrayToSort[high] = temp1;
-        this.generateBars("quick");
-        i = i + 1;
-
-        this.onQuickSort(low, i - 1);
-        this.onQuickSort(i + 1, high);
-      }
-    });
+      })
+    );
   }
-
-  // private quickSortPartition(low: number, high: number) {
-  //   let pivot = this.arrayToSort[high];
-  //   let i = low - 1;
-  //   for (let j = low; j < high; j++) {
-  //     if (this.arrayToSort[j] < pivot) {
-  //       i++;
-  //       let temp = this.arrayToSort[i];
-  //       this.arrayToSort[i] = this.arrayToSort[j];
-  //       this.arrayToSort[j] = temp;
-  //     }
-  //   }
-  //   let temp1 = this.arrayToSort[i + 1];
-  //   this.arrayToSort[i + 1] = this.arrayToSort[high];
-  //   this.arrayToSort[high] = temp1;
-  //   return i + 1;
-  // }
 
   generateBars(sortType) {
     // get the element that will contain the algorithm animation
@@ -183,6 +181,12 @@ export class SortService {
       bar.style.backgroundColor = "#428df5";
       bar.setAttribute("class", "bar");
       visualContainer.appendChild(bar);
+    });
+  }
+
+  killAnimation() {
+    this.timeOuts.forEach((timeOut) => {
+      clearTimeout(timeOut);
     });
   }
 

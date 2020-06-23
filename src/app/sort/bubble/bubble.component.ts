@@ -11,6 +11,7 @@ export class BubbleComponent implements OnInit {
   languageUrl = "";
 
   ngOnInit() {
+    this.sortService.killAnimation();
     this.sortService.populateArray();
     this.sortService.generateBars("bubble");
     this.languageUrl = this.sortService.languageSelect("cplusplus", "bubble");

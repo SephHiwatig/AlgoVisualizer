@@ -12,6 +12,7 @@ export class SelectionComponent implements OnInit {
   constructor(private sortService: SortService) {}
 
   ngOnInit() {
+    this.sortService.killAnimation();
     this.sortService.populateArray();
     this.sortService.generateBars("selection");
     this.languageUrl = this.sortService.languageSelect(

@@ -12,6 +12,7 @@ export class QuickComponent implements OnInit {
   constructor(private sortService: SortService) {}
 
   ngOnInit() {
+    this.sortService.killAnimation();
     this.sortService.populateArray();
     this.sortService.generateBars("quick");
     this.languageUrl = this.sortService.languageSelect("cplusplus", "quick");
