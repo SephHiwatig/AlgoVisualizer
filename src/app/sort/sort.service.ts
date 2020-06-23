@@ -85,6 +85,49 @@ export class SortService {
     }
   }
 
+  onQuickSort(low: number, high: number) {
+    setTimeout(() => {
+      if (low < high) {
+        let pivot = this.arrayToSort[high];
+        let i = low - 1;
+        for (var j = low; j < high; j++) {
+          if (this.arrayToSort[j] < pivot) {
+            i++;
+            let temp = this.arrayToSort[i];
+            this.arrayToSort[i] = this.arrayToSort[j];
+            this.arrayToSort[j] = temp;
+            this.generateBars("quick");
+          }
+        }
+        let temp1 = this.arrayToSort[i + 1];
+        this.arrayToSort[i + 1] = this.arrayToSort[high];
+        this.arrayToSort[high] = temp1;
+        this.generateBars("quick");
+        i = i + 1;
+
+        this.onQuickSort(low, i - 1);
+        this.onQuickSort(i + 1, high);
+      }
+    });
+  }
+
+  // private quickSortPartition(low: number, high: number) {
+  //   let pivot = this.arrayToSort[high];
+  //   let i = low - 1;
+  //   for (let j = low; j < high; j++) {
+  //     if (this.arrayToSort[j] < pivot) {
+  //       i++;
+  //       let temp = this.arrayToSort[i];
+  //       this.arrayToSort[i] = this.arrayToSort[j];
+  //       this.arrayToSort[j] = temp;
+  //     }
+  //   }
+  //   let temp1 = this.arrayToSort[i + 1];
+  //   this.arrayToSort[i + 1] = this.arrayToSort[high];
+  //   this.arrayToSort[high] = temp1;
+  //   return i + 1;
+  // }
+
   generateBars(sortType) {
     // get the element that will contain the algorithm animation
     const visualContainer = document.querySelector(
@@ -117,6 +160,13 @@ export class SortService {
       }
       case "insertion": {
         sortButton.addEventListener("click", this.onInsertionSort.bind(this));
+        break;
+      }
+      case "quick": {
+        sortButton.addEventListener(
+          "click",
+          this.onQuickSort.bind(this, 0, this.arrayToSort.length - 1)
+        );
         break;
       }
     }

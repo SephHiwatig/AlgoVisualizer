@@ -1,1 +1,69 @@
-<p>quick works!</p>
+<section class="algo-container">
+  <div class="algo-info">
+    <h1>Quick Sort</h1>
+    <p>
+      QuickSort is a Divide and Conquer algorithm. It picks an element as pivot
+      and partitions the given array around the picked pivot. There are many
+      different versions of quickSort that pick pivot in different ways.
+    </p>
+    <ol>
+      <li>Always pick first element as pivot.</li>
+      <li>Always pick last element as pivot</li>
+      <li>Pick a random element as pivot.</li>
+      <li>Pick median as pivot.</li>
+    </ol>
+    <p>
+      The key process in quickSort is partition(). Target of partitions is,
+      given an array and an element x of array as pivot, put x at its correct
+      position in sorted array and put all smaller elements (smaller than x)
+      before x, and put all greater elements (greater than x) after x. All this
+      should be done in linear time.
+    </p>
+
+    <p>
+      <strong>Time Complexity :</strong> O(nLogn) <br />
+      <strong>Space Complexity :</strong> O(1)
+    </p>
+    <small
+      ><a href="https://www.geeksforgeeks.org/selection-sort/"
+        >Source: https://www.geeksforgeeks.org/selection-sort/</a
+      ></small
+    >
+  </div>
+  <div class="algo-visual"></div>
+</section>
+<section class="complexities">
+  <div class="space-complexity">
+    <div class="language-menu">
+      <div
+        class="language"
+        id="cplusplus"
+        (click)="onLanguageSelect('cplusplus')"
+      >
+        C++
+      </div>
+      <div class="language" id="c" (click)="onLanguageSelect('c')">C</div>
+      <div class="language" id="python" (click)="onLanguageSelect('python')">
+        Python
+      </div>
+      <div class="language" id="java" (click)="onLanguageSelect('java')">
+        Java
+      </div>
+      <div class="language" id="csharp" (click)="onLanguageSelect('csharp')">
+        C#
+      </div>
+    </div>
+    <div class="code-img-wrapper">
+      <img src="{{ languageUrl }}" alt="code-snippet" />
+    </div>
+  </div>
+  <div class="time-complexity">
+    <h2>Illustration</h2>
+    <div class="code-img-wrapper">
+      <img
+        src="../../../assets/sample_code/sort/quick/QuickSort2.png"
+        alt="code-snippet"
+      />
+    </div>
+  </div>
+</section>
