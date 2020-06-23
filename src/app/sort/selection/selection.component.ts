@@ -21,10 +21,6 @@ export class SelectionComponent implements OnInit {
     );
   }
 
-  // onSelectionSort() {
-  //   this.sortService.onSelectionSort();
-  // }
-
   onLanguageSelect(language) {
     this.languageUrl = this.sortService.languageSelect(language, "selection");
   }

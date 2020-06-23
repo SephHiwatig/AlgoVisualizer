@@ -141,7 +141,7 @@ export class SortService {
     sortButton.style.top = "5px";
     sortButton.style.left = "5px";
     sortButton.style.border = "none";
-    sortButton.style.backgroundColor = "#428df5";
+    sortButton.style.backgroundColor = "#1fa638"; //"#428df5"
     sortButton.style.color = "#fff";
     sortButton.style.padding = "10px";
     sortButton.style.borderRadius = "4px";
