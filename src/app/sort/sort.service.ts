@@ -27,21 +27,19 @@ export class SortService {
         // the current index i will be treated as the lowest value
         let minIndex = i;
 
-        setTimeout(() => {
-          // Compare each value after minIndex to value of minIndex
-          // if value of minIndex is greater than the value to be compared
-          // changed the minIndex to the index of the value to be compared (Confusing @.@)
-          for (let j = i + 1; j < barCount; j++) {
-            if (this.arrayToSort[j] < this.arrayToSort[minIndex]) {
-              minIndex = j;
-            }
+        // Compare each value after minIndex to value of minIndex
+        // if value of minIndex is greater than the value to be compared
+        // changed the minIndex to the index of the value to be compared (Confusing @.@)
+        for (let j = i + 1; j < barCount; j++) {
+          if (this.arrayToSort[j] < this.arrayToSort[minIndex]) {
+            minIndex = j;
           }
-          // swap the value of the minIndex to the value of current i
-          let temp = this.arrayToSort[minIndex];
-          this.arrayToSort[minIndex] = this.arrayToSort[i];
-          this.arrayToSort[i] = temp;
-          this.generateBars("selection");
-        }, i * 60);
+        }
+        // swap the value of the minIndex to the value of current i
+        let temp = this.arrayToSort[minIndex];
+        this.arrayToSort[minIndex] = this.arrayToSort[i];
+        this.arrayToSort[i] = temp;
+        this.generateBars("selection");
       }, i * 50);
     }
   }
@@ -63,9 +61,27 @@ export class SortService {
               this.arrayToSort[j + 1] = temp;
               this.generateBars("bubble");
             }
-          }, i * 30);
+          }, i * 2);
         }
-      }, i * 20);
+      }, i);
+    }
+  }
+
+  onInsertionSort() {
+    let barCount = this.arrayToSort.length;
+    for (let i = 1; i < barCount; i++) {
+      setTimeout(() => {
+        let key = this.arrayToSort[i];
+        let j = i - 1;
+
+        while (j >= 0 && this.arrayToSort[j] > key) {
+          this.arrayToSort[j + 1] = this.arrayToSort[j];
+          j -= 1;
+          this.generateBars("insertion");
+        }
+        this.arrayToSort[j + 1] = key;
+        this.generateBars("insertion");
+      }, i);
     }
   }
 
@@ -97,6 +113,10 @@ export class SortService {
       }
       case "bubble": {
         sortButton.addEventListener("click", this.onBubbleSort.bind(this));
+        break;
+      }
+      case "insertion": {
+        sortButton.addEventListener("click", this.onInsertionSort.bind(this));
         break;
       }
     }
