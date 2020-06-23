@@ -12,8 +12,7 @@
 }
 
 .algo-info {
-  height: calc(100vh - 100px);
-  overflow-y: auto;
+  min-width: 250px;
 }
 
 .algo-visual {
@@ -79,6 +78,9 @@
 
   .algo-info {
     flex: 2;
+    height: calc(100vh - 100px);
+    overflow-x: hidden;
+    overflow-y: auto;
   }
 
   .algo-visual {

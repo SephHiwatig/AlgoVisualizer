@@ -12,7 +12,7 @@ export class SortService {
   // with random values
   populateArray() {
     this.arrayToSort = [];
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 75; i++) {
       this.arrayToSort.push(Math.ceil(Math.random() * 100));
     }
   }
