@@ -13,7 +13,7 @@ export class LinearComponent implements OnInit {
 
   ngOnInit() {
     this.searchService.populateArray();
-    this.searchService.generateBoxes();
+    this.searchService.generateBoxes("linear");
     this.languageUrl = this.searchService.languageSelect("cplusplus", "linear");
   }
 
