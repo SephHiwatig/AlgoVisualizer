@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SortService } from "../sort.service";
 
 @Component({
@@ -6,19 +6,22 @@ import { SortService } from "../sort.service";
   templateUrl: "./selection.component.html",
   styleUrls: ["./selection.component.css", "../sort.style.css"],
 })
-export class SelectionComponent implements OnInit {
+export class SelectionComponent implements OnInit, OnDestroy {
   languageUrl = "";
 
   constructor(private sortService: SortService) {}
 
   ngOnInit() {
-    this.sortService.killAnimation();
     this.sortService.populateArray();
     this.sortService.generateBars("selection");
     this.languageUrl = this.sortService.languageSelect(
       "cplusplus",
       "selection"
     );
+  }
+
+  ngOnDestroy() {
+    this.sortService.killAnimation();
   }
 
   onLanguageSelect(language) {

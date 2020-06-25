@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from "@angular/core";
+import { Component, OnInit, AfterViewInit, OnDestroy } from "@angular/core";
 import { SortService } from "../sort.service";
 
 @Component({
@@ -6,15 +6,18 @@ import { SortService } from "../sort.service";
   templateUrl: "./bubble.component.html",
   styleUrls: ["./bubble.component.css", "../sort.style.css"],
 })
-export class BubbleComponent implements OnInit {
+export class BubbleComponent implements OnInit, OnDestroy {
   constructor(private sortService: SortService) {}
   languageUrl = "";
 
   ngOnInit() {
-    this.sortService.killAnimation();
     this.sortService.populateArray();
     this.sortService.generateBars("bubble");
     this.languageUrl = this.sortService.languageSelect("cplusplus", "bubble");
+  }
+
+  ngOnDestroy() {
+    this.sortService.killAnimation();
   }
 
   onLanguageSelect(language) {
