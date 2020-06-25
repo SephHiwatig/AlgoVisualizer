@@ -12,6 +12,8 @@ export class LinearComponent implements OnInit {
   constructor(private searchService: SearchSeervice) {}
 
   ngOnInit() {
+    this.searchService.populateArray();
+    this.searchService.generateBoxes();
     this.languageUrl = this.searchService.languageSelect("cplusplus", "linear");
   }
 

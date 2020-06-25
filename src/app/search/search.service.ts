@@ -8,6 +8,38 @@ export class SearchSeervice {
 
   constructor() {}
 
+  populateArray() {
+    this.arrayToSearch = [];
+    for (let i = 0; i < 10; i++) {
+      this.arrayToSearch.push(Math.ceil(Math.random() * 10));
+    }
+  }
+
+  generateBoxes() {
+    const visualContainer = document.querySelector(
+      ".algo-visual"
+    ) as HTMLElement;
+    visualContainer.style.alignItems = "center";
+    this.arrayToSearch.forEach((num) => {
+      const box = document.createElement("div");
+      const size = Math.ceil((visualContainer.clientWidth - 20) / 10);
+      box.setAttribute("class", "box");
+      box.style.width = size + "px";
+      box.style.height = size + "px";
+      box.style.marginLeft = "1px";
+      box.style.marginRight = "1px";
+      box.style.borderRadius = "4px";
+      box.style.backgroundColor = "#428df5";
+      box.style.textAlign = "center";
+      box.style.verticalAlign = "middle";
+      box.style.lineHeight = size + "px";
+      box.style.fontSize = "large";
+      box.innerHTML = num;
+      box.style.color = "#fff";
+      visualContainer.appendChild(box);
+    });
+  }
+
   languageSelect(language, searchType) {
     let languageUrl = "";
     let languages = document.querySelectorAll(".language");
