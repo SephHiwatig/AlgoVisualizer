@@ -21,6 +21,8 @@ export class SearchSeervice {
   }
 
   onLinearSearch() {
+    const searchBtn = document.querySelector("#searchBtn") as HTMLInputElement;
+    searchBtn.disabled = true;
     const boxCount = this.arrayToSearch.length;
     const boxes = document.querySelectorAll(".box");
     for (let i = 0; i < boxCount; i++) {
@@ -36,7 +38,38 @@ export class SearchSeervice {
             });
             this.timeOuts = [];
             (boxes[i] as HTMLElement).style.backgroundColor = "green";
-            alert(this.valueToSearch + "Found!");
+
+            const visualContainer = document.querySelector(
+              ".algo-visual"
+            ) as HTMLElement;
+            let resetContainer = document.createElement("div");
+            resetContainer.style.margin = "auto";
+            resetContainer.style.position = "absolute";
+            resetContainer.style.zIndex = "999";
+            resetContainer.style.background = "#fff";
+            resetContainer.style.border = "1px solid grey";
+            resetContainer.style.padding = "10px";
+            resetContainer.style.borderRadius = "4px";
+            resetContainer.style.textAlign = "center";
+
+            let found = document.createElement("p");
+            found.innerHTML =
+              "Found " + this.valueToSearch + " at index " + i + "!";
+            let resetBtn = document.createElement("button");
+            resetBtn.innerHTML = "Reset";
+            resetBtn.style.borderRadius = "4px";
+            resetBtn.style.padding = "5px";
+            resetBtn.style.background = "#1fa638";
+            resetBtn.style.border = "none";
+            resetBtn.style.cursor = "pointer";
+            resetBtn.addEventListener("click", () => {
+              this.populateArray();
+              this.generateBoxes("linear");
+            });
+            resetContainer.appendChild(found);
+            resetContainer.appendChild(resetBtn);
+
+            visualContainer.appendChild(resetContainer);
           }
         }, i * 1000)
       );
@@ -55,8 +88,10 @@ export class SearchSeervice {
     const visualContainer = document.querySelector(
       ".algo-visual"
     ) as HTMLElement;
-    var searchBtn = document.createElement("button");
+    visualContainer.innerHTML = "";
+    let searchBtn = document.createElement("button");
     searchBtn.innerHTML = "Search " + this.valueToSearch;
+    searchBtn.setAttribute("id", "searchBtn");
     searchBtn.style.position = "absolute";
     searchBtn.style.top = "5px";
     searchBtn.style.left = "5px";
