@@ -22,11 +22,12 @@ export class SearchSeervice {
     this.valueToSearch = this.arrayToSearch[randomIndex];
   }
 
-  populateArrayForBinary() {
+  populateSortedArray() {
     this.numOfBoxes = 20;
     this.arrayToSearch = [];
+    let multiplier = Math.ceil(Math.random() * 5);
     for (let i = 0; i < 20; i++) {
-      this.arrayToSearch.push(i * 2);
+      this.arrayToSearch.push(i * multiplier);
     }
 
     const randomIndex = Math.ceil(Math.random() * 20) - 1;
@@ -79,7 +80,7 @@ export class SearchSeervice {
             (boxes[mid] as HTMLElement).style.backgroundColor = "green";
             this.killAnimation();
             this.showReset(() => {
-              this.populateArrayForBinary();
+              this.populateSortedArray();
               this.generateBoxes("binary");
             }, mid);
             i = 5;
@@ -92,7 +93,47 @@ export class SearchSeervice {
   }
 
   onJumpSearch() {
-    alert("jump");
+    const searchBtn = document.querySelector("#searchBtn") as HTMLInputElement;
+    searchBtn.disabled = true;
+    const boxes = document.querySelectorAll(".box");
+    let boxCount = this.arrayToSearch.length;
+
+    let step = Math.floor(Math.sqrt(boxCount));
+
+    let prev = 0;
+    (boxes[prev] as HTMLElement).style.backgroundColor = "#e91e63";
+    let tempInt = setInterval(() => {
+      if (
+        this.arrayToSearch[Math.min(step, boxCount) - 1] < this.valueToSearch
+      ) {
+        prev = step;
+        (boxes[prev] as HTMLElement).style.backgroundColor = "#e91e63";
+        step += Math.floor(Math.sqrt(boxCount));
+      } else {
+        if (boxes[step]) {
+          (boxes[step] as HTMLElement).style.backgroundColor = "#e91e63";
+        }
+        clearInterval(tempInt);
+        let tempInt2 = setInterval(() => {
+          if (this.arrayToSearch[prev] < this.valueToSearch) {
+            (boxes[prev] as HTMLElement).style.backgroundColor = "#e9a21e";
+            prev++;
+            if (prev == Math.min(step, boxCount)) {
+              clearInterval(tempInt2);
+            }
+          } else {
+            if (this.arrayToSearch[prev] == this.valueToSearch) {
+              (boxes[prev] as HTMLElement).style.backgroundColor = "green";
+              clearInterval(tempInt2);
+              this.showReset(() => {
+                this.populateSortedArray();
+                this.generateBoxes("jump");
+              }, prev);
+            }
+          }
+        }, 1000);
+      }
+    }, 1000);
   }
 
   generateBoxes(searchType) {

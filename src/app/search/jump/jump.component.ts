@@ -12,6 +12,8 @@ export class JumpComponent implements OnInit {
   constructor(private searchService: SearchSeervice) {}
 
   ngOnInit() {
+    this.searchService.populateSortedArray();
+    this.searchService.generateBoxes("jump");
     this.languageUrl = this.searchService.languageSelect("cplusplus", "jump");
   }
 

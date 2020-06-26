@@ -12,7 +12,7 @@ export class BinaryComponent implements OnInit, OnDestroy {
   constructor(private searchService: SearchSeervice) {}
 
   ngOnInit() {
-    this.searchService.populateArrayForBinary();
+    this.searchService.populateSortedArray();
     this.searchService.generateBoxes("binary");
     this.languageUrl = this.searchService.languageSelect("cplusplus", "binary");
   }
