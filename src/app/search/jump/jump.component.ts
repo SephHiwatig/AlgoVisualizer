@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SearchSeervice } from "../search.service";
 
 @Component({
@@ -6,7 +6,7 @@ import { SearchSeervice } from "../search.service";
   templateUrl: "./jump.component.html",
   styleUrls: ["./jump.component.css"],
 })
-export class JumpComponent implements OnInit {
+export class JumpComponent implements OnInit, OnDestroy {
   languageUrl;
 
   constructor(private searchService: SearchSeervice) {}
@@ -15,6 +15,10 @@ export class JumpComponent implements OnInit {
     this.searchService.populateSortedArray();
     this.searchService.generateBoxes("jump");
     this.languageUrl = this.searchService.languageSelect("cplusplus", "jump");
+  }
+
+  ngOnDestroy() {
+    this.searchService.killAnimation();
   }
 
   onLanguageSelect(language) {
