@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { SearchSeervice } from "../search.service";
 
 @Component({
@@ -6,7 +6,7 @@ import { SearchSeervice } from "../search.service";
   templateUrl: "./linear.component.html",
   styleUrls: ["./linear.component.css", "../search.style.css"],
 })
-export class LinearComponent implements OnInit {
+export class LinearComponent implements OnInit, OnDestroy {
   languageUrl;
 
   constructor(private searchService: SearchSeervice) {}
@@ -15,6 +15,10 @@ export class LinearComponent implements OnInit {
     this.searchService.populateArray();
     this.searchService.generateBoxes("linear");
     this.languageUrl = this.searchService.languageSelect("cplusplus", "linear");
+  }
+
+  ngOnDestroy() {
+    this.searchService.killAnimation();
   }
 
   onLanguageSelect(language) {

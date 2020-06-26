@@ -7,16 +7,29 @@ export class SearchSeervice {
   arrayToSearch = [];
   valueToSearch;
   timeOuts = [];
+  numOfBoxes;
 
   constructor() {}
 
   populateArray() {
+    this.numOfBoxes = 10;
     this.arrayToSearch = [];
     for (let i = 0; i < 10; i++) {
       this.arrayToSearch.push(Math.ceil(Math.random() * 100));
     }
 
     const randomIndex = Math.ceil(Math.random() * 10) - 1;
+    this.valueToSearch = this.arrayToSearch[randomIndex];
+  }
+
+  populateArrayForBinary() {
+    this.numOfBoxes = 20;
+    this.arrayToSearch = [];
+    for (let i = 0; i < 20; i++) {
+      this.arrayToSearch.push(i);
+    }
+
+    const randomIndex = Math.ceil(Math.random() * 20) - 1;
     this.valueToSearch = this.arrayToSearch[randomIndex];
   }
 
@@ -120,7 +133,9 @@ export class SearchSeervice {
     visualContainer.style.alignItems = "center";
     this.arrayToSearch.forEach((num) => {
       const box = document.createElement("div");
-      const size = Math.ceil((visualContainer.clientWidth - 20) / 10);
+      const size = Math.ceil(
+        (visualContainer.clientWidth - this.numOfBoxes * 2) / this.numOfBoxes
+      );
       box.setAttribute("class", "box");
       box.style.width = size + "px";
       box.style.height = size + "px";
@@ -190,5 +205,13 @@ export class SearchSeervice {
       }
     }
     return languageUrl;
+  }
+
+  killAnimation() {
+    this.timeOuts.forEach((to) => {
+      clearTimeout(to);
+    });
+
+    this.timeOuts = [];
   }
 }
