@@ -26,7 +26,7 @@ export class SearchSeervice {
     this.numOfBoxes = 20;
     this.arrayToSearch = [];
     for (let i = 0; i < 20; i++) {
-      this.arrayToSearch.push(i);
+      this.arrayToSearch.push(i * 2);
     }
 
     const randomIndex = Math.ceil(Math.random() * 20) - 1;
@@ -46,43 +46,12 @@ export class SearchSeervice {
             (boxes[i - 1] as HTMLElement).style.backgroundColor = "#428df5";
           }
           if (this.arrayToSearch[i] === this.valueToSearch) {
-            this.timeOuts.forEach((to) => {
-              clearTimeout(to);
-            });
-            this.timeOuts = [];
+            this.killAnimation();
             (boxes[i] as HTMLElement).style.backgroundColor = "green";
-
-            const visualContainer = document.querySelector(
-              ".algo-visual"
-            ) as HTMLElement;
-            let resetContainer = document.createElement("div");
-            resetContainer.style.margin = "auto";
-            resetContainer.style.position = "absolute";
-            resetContainer.style.zIndex = "999";
-            resetContainer.style.background = "#fff";
-            resetContainer.style.border = "1px solid grey";
-            resetContainer.style.padding = "10px";
-            resetContainer.style.borderRadius = "4px";
-            resetContainer.style.textAlign = "center";
-
-            let found = document.createElement("p");
-            found.innerHTML =
-              "Found " + this.valueToSearch + " at index " + i + "!";
-            let resetBtn = document.createElement("button");
-            resetBtn.innerHTML = "Reset";
-            resetBtn.style.borderRadius = "4px";
-            resetBtn.style.padding = "5px";
-            resetBtn.style.background = "#1fa638";
-            resetBtn.style.border = "none";
-            resetBtn.style.cursor = "pointer";
-            resetBtn.addEventListener("click", () => {
+            this.showReset(() => {
               this.populateArray();
               this.generateBoxes("linear");
-            });
-            resetContainer.appendChild(found);
-            resetContainer.appendChild(resetBtn);
-
-            visualContainer.appendChild(resetContainer);
+            }, i);
           }
         }, i * 1000)
       );
@@ -90,7 +59,36 @@ export class SearchSeervice {
   }
 
   onBinarySearch() {
-    alert("binary");
+    const searchBtn = document.querySelector("#searchBtn") as HTMLInputElement;
+    searchBtn.disabled = true;
+    const boxes = document.querySelectorAll(".box");
+    let min = 0;
+    let max = this.arrayToSearch.length - 1;
+    let previousMid;
+
+    for (let i = 0; i < 5; i++) {
+      this.timeOuts.push(
+        setTimeout(() => {
+          if (previousMid) {
+            (boxes[previousMid] as HTMLElement).style.backgroundColor = "#000";
+          }
+          let mid = Math.floor(min + (max - min) / 2);
+          previousMid = mid;
+          (boxes[mid] as HTMLElement).style.backgroundColor = "#e91e63";
+          if (this.arrayToSearch[mid] === this.valueToSearch) {
+            (boxes[mid] as HTMLElement).style.backgroundColor = "green";
+            this.killAnimation();
+            this.showReset(() => {
+              this.populateArrayForBinary();
+              this.generateBoxes("binary");
+            }, mid);
+            i = 5;
+          }
+          if (this.arrayToSearch[mid] < this.valueToSearch) min = mid + 1;
+          else max = mid - 1;
+        }, i * 1000)
+      );
+    }
   }
 
   onJumpSearch() {
@@ -213,5 +211,36 @@ export class SearchSeervice {
     });
 
     this.timeOuts = [];
+  }
+
+  private showReset(btnAction, index) {
+    const visualContainer = document.querySelector(
+      ".algo-visual"
+    ) as HTMLElement;
+    let resetContainer = document.createElement("div");
+    resetContainer.style.margin = "auto";
+    resetContainer.style.position = "absolute";
+    resetContainer.style.zIndex = "999";
+    resetContainer.style.background = "#fff";
+    resetContainer.style.border = "1px solid grey";
+    resetContainer.style.padding = "10px";
+    resetContainer.style.borderRadius = "4px";
+    resetContainer.style.textAlign = "center";
+
+    let found = document.createElement("p");
+    found.innerHTML =
+      "Found " + this.valueToSearch + " at index " + index + "!";
+    let resetBtn = document.createElement("button");
+    resetBtn.innerHTML = "Reset";
+    resetBtn.style.borderRadius = "4px";
+    resetBtn.style.padding = "5px";
+    resetBtn.style.background = "#1fa638";
+    resetBtn.style.border = "none";
+    resetBtn.style.cursor = "pointer";
+    resetBtn.addEventListener("click", btnAction);
+    resetContainer.appendChild(found);
+    resetContainer.appendChild(resetBtn);
+
+    visualContainer.appendChild(resetContainer);
   }
 }
