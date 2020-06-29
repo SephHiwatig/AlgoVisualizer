@@ -36,19 +36,24 @@ export class PathService {
         });
         col.addEventListener("mouseenter", (event) => {
           if (event.buttons === 1) {
-            console.log(
-              ((event.target as HTMLElement).style.backgroundColor = "black")
-            );
+            const el = event.target as HTMLElement;
+            if (el.childElementCount === 0) {
+              el.style.backgroundColor = "black";
+            }
           }
         });
         col.addEventListener("mousedown", (event) => {
-          (event.target as HTMLElement).style.backgroundColor = "black";
+          const el = event.target as HTMLElement;
+          console.log(el);
+          if (!el.id) {
+            el.style.backgroundColor = "black";
+          }
         });
 
         if (i === 0 && j === 0) {
           let img = document.createElement("img");
-          img.style.maxWidth = "60%";
-          img.style.maxHeight = "60%";
+          img.style.maxWidth = "100%";
+          img.style.maxHeight = "100%";
           img.style.margin = "auto";
           img.setAttribute("src", "./assets/imgs/start.png");
           img.setAttribute("id", "start");
@@ -61,8 +66,8 @@ export class PathService {
 
         if (i === 24 && j === 24) {
           let img = document.createElement("img");
-          img.style.maxWidth = "60%";
-          img.style.maxHeight = "60%";
+          img.style.maxWidth = "100%";
+          img.style.maxHeight = "100%";
           img.style.margin = "auto";
           img.setAttribute("src", "./assets/imgs/finish.png");
           img.setAttribute("id", "finish");
@@ -91,7 +96,6 @@ export class PathService {
     ev.preventDefault();
     let data = ev.dataTransfer.getData("text");
     let img = document.getElementById(data) as HTMLElement;
-    console.log(img);
     ev.target.appendChild(img);
   }
 }
