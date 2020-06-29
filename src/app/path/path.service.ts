@@ -34,6 +34,16 @@ export class PathService {
         col.addEventListener("dragover", (event) => {
           this.allowDrop(event);
         });
+        col.addEventListener("mouseenter", (event) => {
+          if (event.buttons === 1) {
+            console.log(
+              ((event.target as HTMLElement).style.backgroundColor = "black")
+            );
+          }
+        });
+        col.addEventListener("mousedown", (event) => {
+          (event.target as HTMLElement).style.backgroundColor = "black";
+        });
 
         if (i === 0 && j === 0) {
           let img = document.createElement("img");
