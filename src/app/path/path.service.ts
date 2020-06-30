@@ -25,6 +25,7 @@ export class PathService {
       row.style.width = "100%";
       row.style.display = "flex";
       row.style.flex = "1";
+      row.draggable = false;
       let matrixRow = [];
       // create 10 columns
       for (let j = 0; j < 25; j++) {
@@ -38,6 +39,7 @@ export class PathService {
         col.setAttribute("id", i + "-" + j);
         col.style.cursor = "pointer";
         col.style.display = "flex";
+        col.draggable = false;
 
         col.addEventListener("drop", (event) => {
           this.drop(event);
@@ -51,7 +53,7 @@ export class PathService {
             if (el.childElementCount === 0) {
               let indeces = el.id.split("-").map((x) => parseInt(x));
               this.matrix[indeces[0]][indeces[1]] = null;
-              el.style.backgroundColor = "black";
+              el.style.backgroundColor = "#2b2b2b";
               el.classList.add("wall");
             }
           }
@@ -61,7 +63,7 @@ export class PathService {
           if (el.childElementCount === 0) {
             let indeces = el.id.split("-").map((x) => parseInt(x));
             this.matrix[indeces[0]][indeces[1]] = null;
-            el.style.backgroundColor = "black";
+            el.style.backgroundColor = "#2b2b2b";
             el.classList.add("wall");
           }
         });
@@ -135,7 +137,12 @@ export class PathService {
       );
       if (!unvisited || unvisited.length === 0) {
         clearInterval(dijInterval);
-        console.log(this.pathInfoTable);
+        visited.forEach((vertex) => {
+          (document.getElementById(
+            vertex
+          ) as HTMLElement).style.backgroundColor = "#fff";
+        });
+        this.showShortestPath();
       } else {
         unvisited = unvisited.sort(
           (a, b) => a.distanceFromOrigin - b.distanceFromOrigin
@@ -144,6 +151,27 @@ export class PathService {
         this.start = nextOrigin.split("-").map((x) => parseInt(x));
       }
     }, 10);
+  }
+
+  private showShortestPath() {
+    let path = [];
+    let step = this.pathInfoTable.find(
+      (x) => x.vertex === this.finish.join("-")
+    );
+    while (step.previousVertex) {
+      step = this.pathInfoTable.find((x) => x.vertex === step.previousVertex);
+      path.push(step.vertex);
+    }
+    path.pop();
+    let showPathInterval = setInterval(() => {
+      if (path.length > 0) {
+        let vertex = path.pop();
+        (document.getElementById(vertex) as HTMLElement).style.backgroundColor =
+          "#1ec5fc";
+      } else {
+        clearInterval(showPathInterval);
+      }
+    }, 100);
   }
 
   private checkVertices(visited) {
@@ -264,13 +292,15 @@ export class PathService {
         this.matrix[this.start[0]][this.start[1]] = 1;
         this.start = el.id.split("-").map((x) => parseInt(x));
         this.matrix[this.start[0]][this.start[1]] = 0;
-      } else {
+      } else if (this.nodeToMove === "finish") {
         this.finish = el.id.split("-").map((x) => parseInt(x));
       }
       this.nodeToMove = undefined;
       let data = ev.dataTransfer.getData("text");
-      let img = document.getElementById(data) as HTMLElement;
-      ev.target.appendChild(img);
+      if (data && data.length > 0 && data !== "") {
+        let img = document.getElementById(data) as HTMLElement;
+        ev.target.appendChild(img);
+      }
     }
   }
 }
