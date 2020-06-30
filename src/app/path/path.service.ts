@@ -150,53 +150,73 @@ export class PathService {
     // Top
     if (this.start[0] - 1 >= 0) {
       let top = [this.start[0] - 1, this.start[1]];
-      let previous = [top[0] + 1, top[1]];
-      let distance = this.calcDistance(previous);
-      let pathToUpdate = this.pathInfoTable.find(
-        (x) => x.vertex === top.join("-")
-      );
-      if (distance < pathToUpdate.distanceFromOrigin) {
-        pathToUpdate.distanceFromOrigin = distance;
-        pathToUpdate.previousVertex = previous.join("-");
+      if (this.matrix[top[0]][top[1]] !== null) {
+        let previous = [top[0] + 1, top[1]];
+        let distance = this.calcDistance(previous);
+        let pathToUpdate = this.pathInfoTable.find(
+          (x) => x.vertex === top.join("-")
+        );
+        if (distance < pathToUpdate.distanceFromOrigin) {
+          pathToUpdate.distanceFromOrigin = distance;
+          pathToUpdate.previousVertex = previous.join("-");
+        }
+        (document.getElementById(
+          top.join("-")
+        ) as HTMLElement).style.backgroundColor = "#1ec5fc";
       }
     }
     // Right
     if (this.start[1] + 1 <= 24) {
       let right = [this.start[0], this.start[1] + 1];
-      let previous = [right[0], right[1] - 1];
-      let distance = this.calcDistance(previous);
-      let pathToUpdate = this.pathInfoTable.find(
-        (x) => x.vertex === right.join("-")
-      );
-      if (distance < pathToUpdate.distanceFromOrigin) {
-        pathToUpdate.distanceFromOrigin = distance;
-        pathToUpdate.previousVertex = previous.join("-");
+      if (this.matrix[right[0]][right[1]] !== null) {
+        let previous = [right[0], right[1] - 1];
+        let distance = this.calcDistance(previous);
+        let pathToUpdate = this.pathInfoTable.find(
+          (x) => x.vertex === right.join("-")
+        );
+        if (distance < pathToUpdate.distanceFromOrigin) {
+          pathToUpdate.distanceFromOrigin = distance;
+          pathToUpdate.previousVertex = previous.join("-");
+        }
+        (document.getElementById(
+          right.join("-")
+        ) as HTMLElement).style.backgroundColor = "#1ec5fc";
       }
     }
     // Bottom
     if (this.start[0] + 1 <= 24) {
       let bottom = [this.start[0] + 1, this.start[1]];
-      let previous = [bottom[0] - 1, bottom[1]];
-      let distance = this.calcDistance(previous);
-      let pathToUpdate = this.pathInfoTable.find(
-        (x) => x.vertex === bottom.join("-")
-      );
-      if (distance < pathToUpdate.distanceFromOrigin) {
-        pathToUpdate.distanceFromOrigin = distance;
-        pathToUpdate.previousVertex = previous.join("-");
+      if (this.matrix[bottom[0]][bottom[1]] !== null) {
+        let previous = [bottom[0] - 1, bottom[1]];
+        let distance = this.calcDistance(previous);
+        let pathToUpdate = this.pathInfoTable.find(
+          (x) => x.vertex === bottom.join("-")
+        );
+        if (distance < pathToUpdate.distanceFromOrigin) {
+          pathToUpdate.distanceFromOrigin = distance;
+          pathToUpdate.previousVertex = previous.join("-");
+        }
+        (document.getElementById(
+          bottom.join("-")
+        ) as HTMLElement).style.backgroundColor = "#1ec5fc";
       }
     }
     // Left
     if (this.start[1] - 1 >= 0) {
       let left = [this.start[0], this.start[1] - 1];
-      let previous = [left[0], left[1] + 1];
-      let distance = this.calcDistance(previous);
-      let pathToUpdate = this.pathInfoTable.find(
-        (x) => x.vertex === left.join("-")
-      );
-      if (distance < pathToUpdate.distanceFromOrigin) {
-        pathToUpdate.distanceFromOrigin = distance;
-        pathToUpdate.previousVertex = previous.join("-");
+      if (this.matrix[left[0]][left[1]] !== null) {
+        let previous = [left[0], left[1] + 1];
+        let distance = this.calcDistance(previous);
+        let pathToUpdate = this.pathInfoTable.find(
+          (x) => x.vertex === left.join("-")
+        );
+        if (distance < pathToUpdate.distanceFromOrigin) {
+          pathToUpdate.distanceFromOrigin = distance;
+          pathToUpdate.previousVertex = previous.join("-");
+        }
+        (document.getElementById(
+          left.join("-")
+        ) as HTMLElement).style.backgroundColor = "#1ec5fc";
       }
     }
     visited.push(this.start.join("-"));
