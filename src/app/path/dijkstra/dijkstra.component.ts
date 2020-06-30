@@ -12,4 +12,8 @@ export class DijkstraComponent implements OnInit {
   ngOnInit() {
     this.pathService.generateGrid();
   }
+
+  onSearch() {
+    this.pathService.startDijkstra();
+  }
 }

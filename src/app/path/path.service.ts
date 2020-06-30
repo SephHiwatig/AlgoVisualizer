@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { parse } from "querystring";
+import { PathInfo } from "./dijkstra.model";
 
 @Injectable({
   providedIn: "root",
@@ -9,6 +10,7 @@ export class PathService {
   start = [0, 0];
   finish = [24, 24];
   nodeToMove;
+  pathInfoTable: PathInfo[] = [];
 
   constructor() {}
 
@@ -76,6 +78,9 @@ export class PathService {
           img.addEventListener("dragstart", (event) => {
             this.drag(event);
           });
+          img.addEventListener("mousedown", (event) => {
+            event.stopPropagation();
+          });
           col.appendChild(img);
         } else {
           matrixRow.push(1);
@@ -91,10 +96,18 @@ export class PathService {
           img.addEventListener("dragstart", (event) => {
             this.drag(event);
           });
+          img.addEventListener("mousedown", (event) => {
+            event.stopPropagation();
+          });
           col.appendChild(img);
         }
-
         row.appendChild(col);
+
+        const vertex = new PathInfo();
+        vertex.vertex = i + "-" + j;
+        vertex.distanceFromOrigin = Infinity;
+        vertex.previousVertex = null;
+        this.pathInfoTable.push(vertex);
       }
       this.matrix.push(matrixRow);
       visualContainer.appendChild(row);
@@ -103,9 +116,110 @@ export class PathService {
 
   startDijkstra() {
     let visited = [];
+    // let unvisited = this.matrix.map((row) => {
+    //   return row.filter((col) => col !== null);
+    // });
+    const startVertex = this.start.join("-");
+    this.pathInfoTable.find(
+      (x) => x.vertex === startVertex
+    ).distanceFromOrigin = 0;
 
-    setInterval(() => {}, 1000);
-    setInterval(() => {}, 1000);
+    let dijInterval = setInterval(() => {
+      visited = this.checkVertices(visited);
+      let unvisited = this.pathInfoTable.filter(
+        (x) =>
+          x.distanceFromOrigin !== 0 &&
+          x.previousVertex !== null &&
+          x.distanceFromOrigin !== Infinity &&
+          !visited.includes(x.vertex)
+      );
+      if (!unvisited || unvisited.length === 0) {
+        clearInterval(dijInterval);
+        console.log(this.pathInfoTable);
+      } else {
+        unvisited = unvisited.sort(
+          (a, b) => a.distanceFromOrigin - b.distanceFromOrigin
+        );
+        let nextOrigin = unvisited[0].vertex;
+        this.start = nextOrigin.split("-").map((x) => parseInt(x));
+      }
+    }, 10);
+  }
+
+  private checkVertices(visited) {
+    // Top
+    if (this.start[0] - 1 >= 0) {
+      let top = [this.start[0] - 1, this.start[1]];
+      let previous = [top[0] + 1, top[1]];
+      let distance = this.calcDistance(previous);
+      let pathToUpdate = this.pathInfoTable.find(
+        (x) => x.vertex === top.join("-")
+      );
+      if (distance < pathToUpdate.distanceFromOrigin) {
+        pathToUpdate.distanceFromOrigin = distance;
+        pathToUpdate.previousVertex = previous.join("-");
+      }
+    }
+    // Right
+    if (this.start[1] + 1 <= 24) {
+      let right = [this.start[0], this.start[1] + 1];
+      let previous = [right[0], right[1] - 1];
+      let distance = this.calcDistance(previous);
+      let pathToUpdate = this.pathInfoTable.find(
+        (x) => x.vertex === right.join("-")
+      );
+      if (distance < pathToUpdate.distanceFromOrigin) {
+        pathToUpdate.distanceFromOrigin = distance;
+        pathToUpdate.previousVertex = previous.join("-");
+      }
+    }
+    // Bottom
+    if (this.start[0] + 1 <= 24) {
+      let bottom = [this.start[0] + 1, this.start[1]];
+      let previous = [bottom[0] - 1, bottom[1]];
+      let distance = this.calcDistance(previous);
+      let pathToUpdate = this.pathInfoTable.find(
+        (x) => x.vertex === bottom.join("-")
+      );
+      if (distance < pathToUpdate.distanceFromOrigin) {
+        pathToUpdate.distanceFromOrigin = distance;
+        pathToUpdate.previousVertex = previous.join("-");
+      }
+    }
+    // Left
+    if (this.start[1] - 1 >= 0) {
+      let left = [this.start[0], this.start[1] - 1];
+      let previous = [left[0], left[1] + 1];
+      let distance = this.calcDistance(previous);
+      let pathToUpdate = this.pathInfoTable.find(
+        (x) => x.vertex === left.join("-")
+      );
+      if (distance < pathToUpdate.distanceFromOrigin) {
+        pathToUpdate.distanceFromOrigin = distance;
+        pathToUpdate.previousVertex = previous.join("-");
+      }
+    }
+    visited.push(this.start.join("-"));
+    return visited;
+  }
+
+  private calcDistance(previous: number[]) {
+    let distance = 0;
+    while (previous && previous.length > 0) {
+      distance += 1;
+      let previousString = previous.join("-");
+      let previousVertex = this.pathInfoTable.find(
+        (x) => x.vertex === previousString
+      );
+      if (previousVertex.previousVertex) {
+        previous = previousVertex.previousVertex
+          .split("-")
+          .map((x) => parseInt(x));
+      } else {
+        previous = undefined;
+      }
+    }
+    return distance;
   }
 
   private allowDrop(ev) {
@@ -134,10 +248,6 @@ export class PathService {
         this.finish = el.id.split("-").map((x) => parseInt(x));
       }
       this.nodeToMove = undefined;
-      console.log(this.matrix);
-      console.log(this.start);
-      console.log(this.finish);
-
       let data = ev.dataTransfer.getData("text");
       let img = document.getElementById(data) as HTMLElement;
       ev.target.appendChild(img);
