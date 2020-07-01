@@ -11,3 +11,12 @@
 :host::ng-deep .col {
   transition: ease-in-out;
 }
+
+.searchBtn {
+  background-color: #1fa638;
+  padding: 10px;
+  border: 1px solid #1fa638;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+}
