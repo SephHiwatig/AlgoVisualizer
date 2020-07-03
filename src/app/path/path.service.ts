@@ -135,7 +135,11 @@ export class PathService {
           x.distanceFromOrigin !== Infinity &&
           !visited.includes(x.vertex)
       );
-      if (!unvisited || unvisited.length === 0) {
+      if (
+        !unvisited ||
+        unvisited.length === 0 ||
+        visited.includes(this.finish.join("-"))
+      ) {
         clearInterval(dijInterval);
         visited.forEach((vertex) => {
           (document.getElementById(
@@ -149,6 +153,9 @@ export class PathService {
         );
         let nextOrigin = unvisited[0].vertex;
         this.start = nextOrigin.split("-").map((x) => parseInt(x));
+        let elId = visited[visited.length - 1];
+        (document.getElementById(elId) as HTMLElement).style.backgroundColor =
+          "#1ec5fc";
       }
     }, 10);
   }
@@ -158,6 +165,7 @@ export class PathService {
     let step = this.pathInfoTable.find(
       (x) => x.vertex === this.finish.join("-")
     );
+    path.push(step.vertex);
     while (step.previousVertex) {
       step = this.pathInfoTable.find((x) => x.vertex === step.previousVertex);
       path.push(step.vertex);
@@ -188,9 +196,6 @@ export class PathService {
           pathToUpdate.distanceFromOrigin = distance;
           pathToUpdate.previousVertex = previous.join("-");
         }
-        (document.getElementById(
-          top.join("-")
-        ) as HTMLElement).style.backgroundColor = "#1ec5fc";
       }
     }
     // Right
@@ -206,9 +211,6 @@ export class PathService {
           pathToUpdate.distanceFromOrigin = distance;
           pathToUpdate.previousVertex = previous.join("-");
         }
-        (document.getElementById(
-          right.join("-")
-        ) as HTMLElement).style.backgroundColor = "#1ec5fc";
       }
     }
     // Bottom
@@ -224,9 +226,6 @@ export class PathService {
           pathToUpdate.distanceFromOrigin = distance;
           pathToUpdate.previousVertex = previous.join("-");
         }
-        (document.getElementById(
-          bottom.join("-")
-        ) as HTMLElement).style.backgroundColor = "#1ec5fc";
       }
     }
     // Left
@@ -242,9 +241,6 @@ export class PathService {
           pathToUpdate.distanceFromOrigin = distance;
           pathToUpdate.previousVertex = previous.join("-");
         }
-        (document.getElementById(
-          left.join("-")
-        ) as HTMLElement).style.backgroundColor = "#1ec5fc";
       }
     }
     visited.push(this.start.join("-"));
