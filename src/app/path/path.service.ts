@@ -15,6 +15,11 @@ export class PathService {
   constructor() {}
 
   generateGrid() {
+    this.matrix = [];
+    this.start = [0, 0];
+    this.finish = [24, 24];
+    this.nodeToMove = undefined;
+    this.pathInfoTable = [];
     const visualContainer = document.querySelector(
       ".algo-visual"
     ) as HTMLElement;
@@ -127,7 +132,51 @@ export class PathService {
     ).distanceFromOrigin = 0;
 
     let dijInterval = setInterval(() => {
-      visited = this.checkVertices(visited);
+      visited = this.checkVertices(visited, false);
+      let unvisited = this.pathInfoTable.filter(
+        (x) =>
+          x.distanceFromOrigin !== 0 &&
+          x.previousVertex !== null &&
+          x.distanceFromOrigin !== Infinity &&
+          !visited.includes(x.vertex)
+      );
+      if (
+        !unvisited ||
+        unvisited.length === 0 ||
+        visited.includes(this.finish.join("-"))
+      ) {
+        clearInterval(dijInterval);
+        visited.forEach((vertex) => {
+          (document.getElementById(
+            vertex
+          ) as HTMLElement).style.backgroundColor = "#fff";
+        });
+        this.showShortestPath();
+      } else {
+        unvisited = unvisited.sort(
+          (a, b) => a.distanceFromOrigin - b.distanceFromOrigin
+        );
+        let nextOrigin = unvisited[0].vertex;
+        this.start = nextOrigin.split("-").map((x) => parseInt(x));
+        let elId = visited[visited.length - 1];
+        (document.getElementById(elId) as HTMLElement).style.backgroundColor =
+          "#1ec5fc";
+      }
+    }, 10);
+  }
+
+  startAStar() {
+    let visited = [];
+    // let unvisited = this.matrix.map((row) => {
+    //   return row.filter((col) => col !== null);
+    // });
+    const startVertex = this.start.join("-");
+    this.pathInfoTable.find(
+      (x) => x.vertex === startVertex
+    ).distanceFromOrigin = 0;
+
+    let dijInterval = setInterval(() => {
+      visited = this.checkVertices(visited, true);
       let unvisited = this.pathInfoTable.filter(
         (x) =>
           x.distanceFromOrigin !== 0 &&
@@ -182,13 +231,16 @@ export class PathService {
     }, 100);
   }
 
-  private checkVertices(visited) {
+  private checkVertices(visited, astar: boolean) {
     // Top
     if (this.start[0] - 1 >= 0) {
       let top = [this.start[0] - 1, this.start[1]];
       if (this.matrix[top[0]][top[1]] !== null) {
         let previous = [top[0] + 1, top[1]];
         let distance = this.calcDistance(previous);
+        if (astar) {
+          distance += this.calcEuclideanDistance(top, this.finish);
+        }
         let pathToUpdate = this.pathInfoTable.find(
           (x) => x.vertex === top.join("-")
         );
@@ -204,6 +256,9 @@ export class PathService {
       if (this.matrix[right[0]][right[1]] !== null) {
         let previous = [right[0], right[1] - 1];
         let distance = this.calcDistance(previous);
+        if (astar) {
+          distance += this.calcEuclideanDistance(right, this.finish);
+        }
         let pathToUpdate = this.pathInfoTable.find(
           (x) => x.vertex === right.join("-")
         );
@@ -219,6 +274,9 @@ export class PathService {
       if (this.matrix[bottom[0]][bottom[1]] !== null) {
         let previous = [bottom[0] - 1, bottom[1]];
         let distance = this.calcDistance(previous);
+        if (astar) {
+          distance += this.calcEuclideanDistance(bottom, this.finish);
+        }
         let pathToUpdate = this.pathInfoTable.find(
           (x) => x.vertex === bottom.join("-")
         );
@@ -234,6 +292,9 @@ export class PathService {
       if (this.matrix[left[0]][left[1]] !== null) {
         let previous = [left[0], left[1] + 1];
         let distance = this.calcDistance(previous);
+        if (astar) {
+          distance += this.calcEuclideanDistance(left, this.finish);
+        }
         let pathToUpdate = this.pathInfoTable.find(
           (x) => x.vertex === left.join("-")
         );
@@ -264,6 +325,12 @@ export class PathService {
       }
     }
     return distance;
+  }
+
+  private calcEuclideanDistance(vertex1: number[], vertex2: number[]) {
+    return (
+      Math.abs(vertex1[0] - vertex2[0]) + Math.abs(vertex1[1] - vertex2[1])
+    );
   }
 
   private allowDrop(ev) {
