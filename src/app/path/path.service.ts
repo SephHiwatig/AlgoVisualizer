@@ -11,13 +11,14 @@ export class PathService {
   finish = [24, 24];
   nodeToMove;
   pathInfoTable: PathInfo[] = [];
+  GRID_SIZE = 25;
 
   constructor() {}
 
   generateGrid() {
     this.matrix = [];
     this.start = [0, 0];
-    this.finish = [24, 24];
+    this.finish = [this.GRID_SIZE - 1, this.GRID_SIZE - 1];
     this.nodeToMove = undefined;
     this.pathInfoTable = [];
     const visualContainer = document.querySelector(
@@ -25,7 +26,7 @@ export class PathService {
     ) as HTMLElement;
     visualContainer.style.flexDirection = "column";
     // create 10 rows
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < this.GRID_SIZE; i++) {
       let row = document.createElement("div");
       row.style.width = "100%";
       row.style.display = "flex";
@@ -33,7 +34,7 @@ export class PathService {
       row.draggable = false;
       let matrixRow = [];
       // create 10 columns
-      for (let j = 0; j < 25; j++) {
+      for (let j = 0; j < this.GRID_SIZE; j++) {
         let col = document.createElement("div");
         col.style.flex = "1";
         col.style.backgroundColor = "#fff";
@@ -93,7 +94,7 @@ export class PathService {
           matrixRow.push(1);
         }
 
-        if (i === 24 && j === 24) {
+        if (i === this.GRID_SIZE - 1 && j === this.GRID_SIZE - 1) {
           let img = document.createElement("img");
           img.style.maxWidth = "100%";
           img.style.maxHeight = "100%";
@@ -251,7 +252,7 @@ export class PathService {
       }
     }
     // Right
-    if (this.start[1] + 1 <= 24) {
+    if (this.start[1] + 1 <= this.GRID_SIZE - 1) {
       let right = [this.start[0], this.start[1] + 1];
       if (this.matrix[right[0]][right[1]] !== null) {
         let previous = [right[0], right[1] - 1];
@@ -269,7 +270,7 @@ export class PathService {
       }
     }
     // Bottom
-    if (this.start[0] + 1 <= 24) {
+    if (this.start[0] + 1 <= this.GRID_SIZE - 1) {
       let bottom = [this.start[0] + 1, this.start[1]];
       if (this.matrix[bottom[0]][bottom[1]] !== null) {
         let previous = [bottom[0] - 1, bottom[1]];
