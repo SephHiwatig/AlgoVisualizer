@@ -28,31 +28,24 @@ export class PathService {
     // create 10 rows
     for (let i = 0; i < this.GRID_SIZE; i++) {
       let row = document.createElement("div");
-      row.style.width = "100%";
-      row.style.display = "flex";
-      row.style.flex = "1";
+      row.classList.add("row");
       row.draggable = false;
       let matrixRow = [];
       // create 10 columns
       for (let j = 0; j < this.GRID_SIZE; j++) {
         let col = document.createElement("div");
-        col.style.flex = "1";
-        col.style.backgroundColor = "#fff";
-        col.style.borderRadius = "4px";
-        col.style.margin = "1px";
-        col.style.border = "1px solid #fff";
         col.setAttribute("class", "col");
         col.setAttribute("id", i + "-" + j);
-        col.style.cursor = "pointer";
-        col.style.display = "flex";
         col.draggable = false;
 
         col.addEventListener("drop", (event) => {
           this.drop(event);
         });
+
         col.addEventListener("dragover", (event) => {
           this.allowDrop(event);
         });
+
         col.addEventListener("mouseenter", (event) => {
           if (event.buttons === 1) {
             const el = event.target as HTMLElement;
@@ -64,6 +57,7 @@ export class PathService {
             }
           }
         });
+
         col.addEventListener("mousedown", (event) => {
           const el = event.target as HTMLElement;
           if (el.childElementCount === 0) {
@@ -77,9 +71,7 @@ export class PathService {
         if (i === 0 && j === 0) {
           matrixRow.push(0);
           let img = document.createElement("img");
-          img.style.maxWidth = "100%";
-          img.style.maxHeight = "100%";
-          img.style.margin = "auto";
+          img.classList.add("node");
           img.setAttribute("src", "./assets/imgs/start.png");
           img.setAttribute("id", "start");
           img.draggable = true;
@@ -96,9 +88,7 @@ export class PathService {
 
         if (i === this.GRID_SIZE - 1 && j === this.GRID_SIZE - 1) {
           let img = document.createElement("img");
-          img.style.maxWidth = "100%";
-          img.style.maxHeight = "100%";
-          img.style.margin = "auto";
+          img.classList.add("node");
           img.setAttribute("src", "./assets/imgs/finish.png");
           img.setAttribute("id", "finish");
           img.addEventListener("dragstart", (event) => {

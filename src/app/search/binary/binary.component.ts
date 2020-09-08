@@ -4,7 +4,7 @@ import { SearchSeervice } from "../search.service";
 @Component({
   selector: "app-binary",
   templateUrl: "./binary.component.html",
-  styleUrls: ["./binary.component.css"],
+  styleUrls: ["./binary.component.css", "../search.style.css"],
 })
 export class BinaryComponent implements OnInit, OnDestroy {
   languageUrl;

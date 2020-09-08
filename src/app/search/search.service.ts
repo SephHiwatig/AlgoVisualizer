@@ -144,15 +144,7 @@ export class SearchSeervice {
     let searchBtn = document.createElement("button");
     searchBtn.innerHTML = "Search " + this.valueToSearch;
     searchBtn.setAttribute("id", "searchBtn");
-    searchBtn.style.position = "absolute";
-    searchBtn.style.top = "5px";
-    searchBtn.style.left = "5px";
-    searchBtn.style.border = "none";
-    searchBtn.style.backgroundColor = "#1fa638"; //"#428df5"
-    searchBtn.style.color = "#fff";
-    searchBtn.style.padding = "10px";
-    searchBtn.style.borderRadius = "4px";
-    searchBtn.style.cursor = "pointer";
+    searchBtn.setAttribute("class", "search-btn");
     switch (searchType) {
       case "linear": {
         searchBtn.addEventListener("click", this.onLinearSearch.bind(this));
@@ -175,7 +167,6 @@ export class SearchSeervice {
       const size = Math.ceil(
         (visualContainer.clientWidth - this.numOfBoxes * 2) / this.numOfBoxes
       );
-      box.setAttribute("class", "box");
       box.style.width = size + "px";
       box.style.height = size + "px";
       box.style.marginLeft = "1px";
@@ -188,6 +179,7 @@ export class SearchSeervice {
       box.style.fontSize = "large";
       box.innerHTML = num;
       box.style.color = "#fff";
+      box.setAttribute("class", "box");
       visualContainer.appendChild(box);
     });
   }
@@ -196,7 +188,7 @@ export class SearchSeervice {
     let languageUrl = "";
     let languages = document.querySelectorAll(".language");
     languages.forEach((language) => {
-      (language as HTMLElement).style.borderBottom = "none";
+      (language as HTMLElement).classList.remove("active-menu");
     });
 
     switch (language) {
@@ -204,42 +196,42 @@ export class SearchSeervice {
         languageUrl =
           "../../../assets/sample_code/search/" + searchType + "/cplusplus.PNG";
         let el = document.querySelector("#cplusplus") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "c": {
         languageUrl =
           "../../../assets/sample_code/search/" + searchType + "/c.PNG";
         let el = document.querySelector("#c") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "python": {
         languageUrl =
           "../../../assets/sample_code/search/" + searchType + "/python.PNG";
         let el = document.querySelector("#python") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "java": {
         languageUrl =
           "../../../assets/sample_code/search/" + searchType + "/java.PNG";
         let el = document.querySelector("#java") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "csharp": {
         languageUrl =
           "../../../assets/sample_code/search/" + searchType + "/csharp.PNG";
         let el = document.querySelector("#csharp") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "php": {
         languageUrl =
           "../../../assets/sample_code/search/" + searchType + "/php.PNG";
         let el = document.querySelector("#php") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
     }

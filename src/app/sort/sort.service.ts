@@ -137,15 +137,7 @@ export class SortService {
     // Add the sort button
     var sortButton = document.createElement("button");
     sortButton.innerHTML = "Sort";
-    sortButton.style.position = "absolute";
-    sortButton.style.top = "5px";
-    sortButton.style.left = "5px";
-    sortButton.style.border = "none";
-    sortButton.style.backgroundColor = "#1fa638"; //"#428df5"
-    sortButton.style.color = "#fff";
-    sortButton.style.padding = "10px";
-    sortButton.style.borderRadius = "4px";
-    sortButton.style.cursor = "pointer";
+    sortButton.classList.add("sort-btn");
     // Determine the type of sort that the button will execute
     switch (sortType) {
       case "selection": {
@@ -177,9 +169,6 @@ export class SortService {
         Math.floor((size / 100) * visualContainer.clientHeight) + "px";
       let width = Math.ceil((visualContainer.clientWidth - 200) / 100);
       bar.style.width = width + "px";
-      bar.style.marginLeft = "1px";
-      bar.style.marginRight = "1px";
-      bar.style.backgroundColor = "#428df5";
       bar.setAttribute("class", "bar");
       visualContainer.appendChild(bar);
     });
@@ -195,7 +184,8 @@ export class SortService {
     let languageUrl = "";
     let languages = document.querySelectorAll(".language");
     languages.forEach((language) => {
-      (language as HTMLElement).style.borderBottom = "none";
+      // (language as HTMLElement).style.borderBottom = "none";
+      (language as HTMLElement).classList.remove("active-menu");
     });
 
     switch (language) {
@@ -203,41 +193,41 @@ export class SortService {
         languageUrl =
           "../../../assets/sample_code/sort/" + sortType + "/cplusplus.PNG";
         let el = document.querySelector("#cplusplus") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "c": {
         languageUrl = "../../../assets/sample_code/sort/" + sortType + "/c.PNG";
         let el = document.querySelector("#c") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "python": {
         languageUrl =
           "../../../assets/sample_code/sort/" + sortType + "/python.PNG";
         let el = document.querySelector("#python") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "java": {
         languageUrl =
           "../../../assets/sample_code/sort/" + sortType + "/java.PNG";
         let el = document.querySelector("#java") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "csharp": {
         languageUrl =
           "../../../assets/sample_code/sort/" + sortType + "/csharp.PNG";
         let el = document.querySelector("#csharp") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
       case "php": {
         languageUrl =
           "../../../assets/sample_code/sort/" + sortType + "/php.PNG";
         let el = document.querySelector("#php") as HTMLElement;
-        el.style.borderBottom = "4px solid #3f51b5";
+        el.classList.add("active-menu");
         break;
       }
     }

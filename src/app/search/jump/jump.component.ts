@@ -4,7 +4,7 @@ import { SearchSeervice } from "../search.service";
 @Component({
   selector: "app-jump",
   templateUrl: "./jump.component.html",
-  styleUrls: ["./jump.component.css"],
+  styleUrls: ["./jump.component.css", "../search.style.css"],
 })
 export class JumpComponent implements OnInit, OnDestroy {
   languageUrl;

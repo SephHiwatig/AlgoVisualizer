@@ -1,0 +1,21 @@
+:host::ng-deep .row {
+  width: 100%;
+  display: flex;
+  flex: 1;
+}
+
+:host::ng-deep .col {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 4px;
+  margin: 1px;
+  border: 1px solid #fff;
+  cursor: pointer;
+  display: flex;
+}
+
+:host::ng-deep .node {
+  margin: auto;
+  max-width: 60%;
+  max-height: 60%;
+}
