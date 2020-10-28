@@ -6,6 +6,7 @@ import { Injectable } from "@angular/core";
 export class SortService {
   arrayToSort = [];
   timeOuts = [];
+  intervals = [];
 
   constructor() {}
 
@@ -77,24 +78,49 @@ export class SortService {
   }
 
   onInsertionSort() {
-    this.timeOuts = [];
+    this.intervals = [];
     let barCount = this.arrayToSort.length;
-    for (let i = 1; i < barCount; i++) {
-      this.timeOuts.push(
-        setTimeout(() => {
-          let key = this.arrayToSort[i];
-          let j = i - 1;
+
+    let insertionTracker = 1;
+    const inserttionInterval = setInterval(() => {
+      this.intervals.push(
+        setInterval(() => {
+          let key = this.arrayToSort[insertionTracker];
+          let j = insertionTracker - 1;
 
           while (j >= 0 && this.arrayToSort[j] > key) {
             this.arrayToSort[j + 1] = this.arrayToSort[j];
             j -= 1;
-            this.generateBars("insertion");
+            // this.generateBars("insertion");
           }
           this.arrayToSort[j + 1] = key;
           this.generateBars("insertion");
-        }, i)
+          insertionTracker++;
+          if(insertionTracker === barCount)  {
+            clearInterval(inserttionInterval);
+            this.killAnimation();
+          }
+        }, insertionTracker * 200)
       );
-    }
+    }, 100)
+
+    // for (let i = 1; i < barCount; i++) {
+    //   this.timeOuts.push(
+    //     setTimeout(() => {
+    //       let key = this.arrayToSort[i];
+    //       let j = i - 1;
+
+    //       while (j >= 0 && this.arrayToSort[j] > key) {
+    //         this.arrayToSort[j + 1] = this.arrayToSort[j];
+    //         j -= 1;
+    //         this.generateBars("insertion");
+    //       }
+    //       this.arrayToSort[j + 1] = key;
+    //       this.generateBars("insertion");
+    //     }, i)
+    //   );
+    //  }
+  
   }
 
   onQuickSort(low: number, high: number) {
@@ -177,6 +203,9 @@ export class SortService {
   killAnimation() {
     this.timeOuts.forEach((timeOut) => {
       clearTimeout(timeOut);
+    });
+    this.intervals.forEach((timeOut) => {
+      clearInterval(timeOut);
     });
   }
 
