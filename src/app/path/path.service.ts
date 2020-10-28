@@ -13,6 +13,9 @@ export class PathService {
   pathInfoTable: PathInfo[] = [];
   GRID_SIZE = 25;
 
+  dijkstraStarted = false;
+  astarStarted = false;
+
   constructor() {}
 
   generateGrid() {
@@ -113,6 +116,10 @@ export class PathService {
   }
 
   startDijkstra() {
+    if(this.dijkstraStarted) {
+      return
+    }
+    this.dijkstraStarted = true;
     let visited = [];
     // let unvisited = this.matrix.map((row) => {
     //   return row.filter((col) => col !== null);
@@ -157,6 +164,10 @@ export class PathService {
   }
 
   startAStar() {
+    if(this.astarStarted) {
+      return
+    }
+    this.astarStarted = true;
     let visited = [];
     // let unvisited = this.matrix.map((row) => {
     //   return row.filter((col) => col !== null);
@@ -218,6 +229,7 @@ export class PathService {
           "#1ec5fc";
       } else {
         clearInterval(showPathInterval);
+        this.showReset();
       }
     }, 100);
   }
@@ -356,5 +368,41 @@ export class PathService {
         ev.target.appendChild(img);
       }
     }
+  }
+
+  private showReset() {
+    const visualContainer = document.querySelector(
+      ".algo-visual"
+    ) as HTMLElement;
+    let resetContainer = document.createElement("div");
+    resetContainer.style.margin = "auto";
+    resetContainer.style.top = "35%";
+    resetContainer.style.left = "45%";
+    resetContainer.style.position = "absolute";
+    resetContainer.style.zIndex = "999";
+    resetContainer.style.background = "#fff";
+    resetContainer.style.border = "1px solid grey";
+    resetContainer.style.padding = "10px";
+    resetContainer.style.borderRadius = "4px";
+    resetContainer.style.textAlign = "center";
+    resetContainer.style.minWidth = "100px";
+
+    let found = document.createElement("p");
+    found.innerHTML =
+      "Reset";
+    let resetBtn = document.createElement("button");
+    resetBtn.innerHTML = "Reset";
+    resetBtn.style.borderRadius = "4px";
+    resetBtn.style.padding = "5px";
+    resetBtn.style.background = "#1fa638";
+    resetBtn.style.border = "none";
+    resetBtn.style.cursor = "pointer";
+    resetBtn.addEventListener("click", () => {
+      window.location.reload();
+    });
+    resetContainer.appendChild(found);
+    resetContainer.appendChild(resetBtn);
+
+    visualContainer.appendChild(resetContainer);
   }
 }
