@@ -11,6 +11,7 @@ import { DijkstraComponent } from "./path/dijkstra/dijkstra.component";
 import { AstarComponent } from "./path/astar/astar.component";
 
 const routes: Routes = [
+  { path: "", redirectTo: "sort/selection", pathMatch: "full"},
   {
     path: "sort",
     children: [
