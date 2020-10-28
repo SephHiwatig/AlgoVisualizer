@@ -90,6 +90,7 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 5px;
+  max-height: 800px;
 }
 
 .code-img-wrapper img {
