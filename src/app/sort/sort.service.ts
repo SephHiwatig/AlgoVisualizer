@@ -58,6 +58,10 @@ export class SortService {
 
   // Sorts the array with Bubble Sort Algorithm
   onBubbleSort() {
+    // Check that the sort has not yet executed
+    if(this.timeOuts.length > 0) {
+      return;
+    }
     this.timeOuts = [];
     let barCount = this.arrayToSort.length;
     // Loop through the whole array once
@@ -76,6 +80,11 @@ export class SortService {
                   this.arrayToSort[j + 1] = temp;
                   this.generateBars("bubble");
                 }
+
+                if(i === barCount - 2) {
+                  this.showReset();
+                }
+
               }, i * 2)
             );
           }
