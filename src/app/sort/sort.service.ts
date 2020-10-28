@@ -21,6 +21,10 @@ export class SortService {
 
   // Sorts the array with Selection Sort Algorithm
   onSelectionSort() {
+    // Check that the sort has not yet executed
+    if(this.timeOuts.length > 0) {
+      return;
+    }
     this.timeOuts = [];
     let barCount = this.arrayToSort.length;
     // loop thorugh the length of the array to be sorted
@@ -44,6 +48,9 @@ export class SortService {
           this.arrayToSort[minIndex] = this.arrayToSort[i];
           this.arrayToSort[i] = temp;
           this.generateBars("selection");
+          if(i === barCount - 2) {
+            this.showReset();
+          }
         }, i * 50)
       );
     }
@@ -99,6 +106,7 @@ export class SortService {
           if(insertionTracker === barCount)  {
             clearInterval(inserttionInterval);
             this.killAnimation();
+            this.showReset();
           }
         }, insertionTracker * 200)
       );
@@ -261,5 +269,40 @@ export class SortService {
       }
     }
     return languageUrl;
+  }
+
+  private showReset() {
+    const visualContainer = document.querySelector(
+      ".algo-visual"
+    ) as HTMLElement;
+    let resetContainer = document.createElement("div");
+    resetContainer.style.margin = "auto";
+    resetContainer.style.top = "35%";
+    resetContainer.style.position = "absolute";
+    resetContainer.style.zIndex = "999";
+    resetContainer.style.background = "#fff";
+    resetContainer.style.border = "1px solid grey";
+    resetContainer.style.padding = "10px";
+    resetContainer.style.borderRadius = "4px";
+    resetContainer.style.textAlign = "center";
+    resetContainer.style.minWidth = "100px";
+
+    let found = document.createElement("p");
+    found.innerHTML =
+      "Reset";
+    let resetBtn = document.createElement("button");
+    resetBtn.innerHTML = "Reset";
+    resetBtn.style.borderRadius = "4px";
+    resetBtn.style.padding = "5px";
+    resetBtn.style.background = "#1fa638";
+    resetBtn.style.border = "none";
+    resetBtn.style.cursor = "pointer";
+    resetBtn.addEventListener("click", () => {
+      window.location.reload();
+    });
+    resetContainer.appendChild(found);
+    resetContainer.appendChild(resetBtn);
+
+    visualContainer.appendChild(resetContainer);
   }
 }
