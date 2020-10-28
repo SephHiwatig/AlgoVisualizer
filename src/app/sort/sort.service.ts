@@ -164,6 +164,8 @@ export class SortService {
 
           this.onQuickSort(low, i - 1);
           this.onQuickSort(i + 1, high);
+        } else {
+          this.showReset();
         }
       })
     );
