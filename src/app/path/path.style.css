@@ -12,6 +12,7 @@
   border: 1px solid #fff;
   cursor: pointer;
   display: flex;
+  transition: background-color 0.5s ease;
 }
 
 :host::ng-deep .node {

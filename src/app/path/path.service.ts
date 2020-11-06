@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { parse } from "querystring";
 import { PathInfo } from "./dijkstra.model";
 
 @Injectable({
