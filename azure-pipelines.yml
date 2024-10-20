@@ -18,7 +18,6 @@ steps:
 - script: |
     npm install -g @angular/cli
     npm install
-    npm uninstall @angular-devkit/build-angular
-    npm install @angular-devkit/build-angular
+    npm install @angular-devkit/build-angular --force
     ng build --configuration production
   displayName: 'npm install and build'
