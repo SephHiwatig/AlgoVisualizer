@@ -22,14 +22,8 @@ steps:
     ng build --configuration production
   displayName: 'npm install and build'
 
-- task: CopyFiles@2
-  inputs:
-    SourceFolder: '$(agent.builddirectory)'
-    Contents: '**'
-    TargetFolder: '$(build.artifactstagingdirectory)'
-
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'BuildArtifact'
+    PathtoPublish: '$(Build.SourcesDirectory)/dist'
+    ArtifactName: 'AlgoVisualizer-App'
     publishLocation: 'Container'
