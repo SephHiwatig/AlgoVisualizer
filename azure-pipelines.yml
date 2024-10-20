@@ -24,6 +24,6 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.SourcesDirectory)/dist'
+    PathtoPublish: 'dist/AlgoVisualizer'
     ArtifactName: 'AlgoVisualizer-App'
     publishLocation: 'Container'
