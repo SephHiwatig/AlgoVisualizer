@@ -16,9 +16,9 @@
             "outputPath": "dist/AlgoVisualizer",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "zone.js",
             "tsConfig": "tsconfig.app.json",
-            "aot": false,
+            "aot": true,
             "assets": [
               "src/favicon.ico",
               "src/assets"
@@ -57,31 +57,39 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": { 
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
           }
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "AlgoVisualizer:build"
+            "buildTarget": "AlgoVisualizer:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "AlgoVisualizer:build:production"
+              "buildTarget": "AlgoVisualizer:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "AlgoVisualizer:build"
+            "buildTarget": "AlgoVisualizer:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "src/polyfills.ts",
+            "polyfills": "zone.js",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
             "assets": [
@@ -120,6 +128,5 @@
           }
         }
       }
-    }},
-  "defaultProject": "AlgoVisualizer"
+    }}
 }
