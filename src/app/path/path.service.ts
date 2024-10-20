@@ -15,7 +15,9 @@ export class PathService {
   dijkstraStarted = false;
   astarStarted = false;
 
-  constructor() {}
+  constructor() {
+
+  }
 
   generateGrid() {
     this.matrix = [];
@@ -26,6 +28,7 @@ export class PathService {
     const visualContainer = document.querySelector(
       ".algo-visual"
     ) as HTMLElement;
+    visualContainer.innerHTML = "";
     visualContainer.style.flexDirection = "column";
     // create 10 rows
     for (let i = 0; i < this.GRID_SIZE; i++) {
@@ -397,7 +400,10 @@ export class PathService {
     resetBtn.style.border = "none";
     resetBtn.style.cursor = "pointer";
     resetBtn.addEventListener("click", () => {
-      window.location.reload();
+      this.GRID_SIZE = 25;
+      this.dijkstraStarted = false;
+      this.astarStarted = false;
+      this.generateGrid();
     });
     resetContainer.appendChild(found);
     resetContainer.appendChild(resetBtn);

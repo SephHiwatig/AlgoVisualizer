@@ -1,4 +1,5 @@
-import { Injectable } from "@angular/core";
+import { inject, Injectable } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
 
 @Injectable({
   providedIn: "root",
@@ -20,7 +21,7 @@ export class SortService {
   }
 
   // Sorts the array with Selection Sort Algorithm
-  onSelectionSort() {
+  onSelectionSort(sortType: string) {
     // Check that the sort has not yet executed
     if(this.timeOuts.length > 0) {
       return;
@@ -49,7 +50,7 @@ export class SortService {
           this.arrayToSort[i] = temp;
           this.generateBars("selection");
           if(i === barCount - 2) {
-            this.showReset();
+            this.showReset(sortType);
           }
         }, i * 50)
       );
@@ -57,7 +58,7 @@ export class SortService {
   }
 
   // Sorts the array with Bubble Sort Algorithm
-  onBubbleSort() {
+  onBubbleSort(sortType: string) {
     // Check that the sort has not yet executed
     if(this.timeOuts.length > 0) {
       return;
@@ -82,7 +83,7 @@ export class SortService {
                 }
 
                 if(i === barCount - 2) {
-                  this.showReset();
+                  this.showReset(sortType);
                 }
 
               }, i * 2)
@@ -93,7 +94,7 @@ export class SortService {
     }
   }
 
-  onInsertionSort() {
+  onInsertionSort(sortType: string) {
     this.intervals = [];
     let barCount = this.arrayToSort.length;
 
@@ -115,32 +116,14 @@ export class SortService {
           if(insertionTracker === barCount)  {
             clearInterval(inserttionInterval);
             this.killAnimation();
-            this.showReset();
+            this.showReset(sortType);
           }
         }, insertionTracker * 200)
       );
     }, 100)
-
-    // for (let i = 1; i < barCount; i++) {
-    //   this.timeOuts.push(
-    //     setTimeout(() => {
-    //       let key = this.arrayToSort[i];
-    //       let j = i - 1;
-
-    //       while (j >= 0 && this.arrayToSort[j] > key) {
-    //         this.arrayToSort[j + 1] = this.arrayToSort[j];
-    //         j -= 1;
-    //         this.generateBars("insertion");
-    //       }
-    //       this.arrayToSort[j + 1] = key;
-    //       this.generateBars("insertion");
-    //     }, i)
-    //   );
-    //  }
-  
   }
 
-  onQuickSort(low: number, high: number) {
+  onQuickSort(low: number, high: number, sortType: string) {
     this.timeOuts = [];
     this.timeOuts.push(
       setTimeout(() => {
@@ -162,10 +145,10 @@ export class SortService {
           this.generateBars("quick");
           i = i + 1;
 
-          this.onQuickSort(low, i - 1);
-          this.onQuickSort(i + 1, high);
+          this.onQuickSort(low, i - 1, sortType);
+          this.onQuickSort(i + 1, high, sortType);
         } else {
-          this.showReset();
+          this.showReset(sortType);
         }
       })
     );
@@ -186,21 +169,21 @@ export class SortService {
     // Determine the type of sort that the button will execute
     switch (sortType) {
       case "selection": {
-        sortButton.addEventListener("click", this.onSelectionSort.bind(this));
+        sortButton.addEventListener("click", this.onSelectionSort.bind(this, sortType));
         break;
       }
       case "bubble": {
-        sortButton.addEventListener("click", this.onBubbleSort.bind(this));
+        sortButton.addEventListener("click", this.onBubbleSort.bind(this, sortType));
         break;
       }
       case "insertion": {
-        sortButton.addEventListener("click", this.onInsertionSort.bind(this));
+        sortButton.addEventListener("click", this.onInsertionSort.bind(this, sortType));
         break;
       }
       case "quick": {
         sortButton.addEventListener(
           "click",
-          this.onQuickSort.bind(this, 0, this.arrayToSort.length - 1)
+          this.onQuickSort.bind(this, 0, this.arrayToSort.length - 1, sortType)
         );
         break;
       }
@@ -282,7 +265,7 @@ export class SortService {
     return languageUrl;
   }
 
-  private showReset() {
+  private showReset(sortType: string) {
     const visualContainer = document.querySelector(
       ".algo-visual"
     ) as HTMLElement;
@@ -309,7 +292,11 @@ export class SortService {
     resetBtn.style.border = "none";
     resetBtn.style.cursor = "pointer";
     resetBtn.addEventListener("click", () => {
-      window.location.reload();
+        this.arrayToSort = [];
+        this.timeOuts = [];
+        this.intervals = [];
+        this.populateArray();
+        this.generateBars(sortType);
     });
     resetContainer.appendChild(found);
     resetContainer.appendChild(resetBtn);
