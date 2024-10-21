@@ -7,21 +7,16 @@ import { SearchSeervice } from "../search.service";
   styleUrls: ["./jump.component.css", "../search.style.css"],
 })
 export class JumpComponent implements OnInit, OnDestroy {
-  languageUrl;
 
   constructor(private searchService: SearchSeervice) {}
 
   ngOnInit() {
     this.searchService.populateSortedArray();
     this.searchService.generateBoxes("jump");
-    this.languageUrl = this.searchService.languageSelect("cplusplus", "jump");
   }
 
   ngOnDestroy() {
     this.searchService.killAnimation();
   }
 
-  onLanguageSelect(language) {
-    this.languageUrl = this.searchService.languageSelect(language, "jump");
-  }
 }

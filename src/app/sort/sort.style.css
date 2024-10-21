@@ -5,9 +5,10 @@
   border: none;
   background-color: #1fa638;
   color: #fff;
-  padding: 10px;
   border-radius: 4px;
   cursor: pointer;
+  height: 40px;
+  width: 100px;
 }
 
 :host::ng-deep .sort-btn:hover {

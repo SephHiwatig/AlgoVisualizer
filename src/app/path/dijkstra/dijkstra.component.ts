@@ -7,6 +7,7 @@ import { PathService } from "../path.service";
   styleUrls: ["./dijkstra.component.css", "../path.style.css"],
 })
 export class DijkstraComponent implements OnInit {
+  
   constructor(private pathService: PathService) {}
 
   ngOnInit() {

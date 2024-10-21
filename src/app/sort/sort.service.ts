@@ -20,7 +20,6 @@ export class SortService {
     }
   }
 
-  // Sorts the array with Selection Sort Algorithm
   onSelectionSort(sortType: string) {
     // Check that the sort has not yet executed
     if(this.timeOuts.length > 0) {
@@ -57,7 +56,6 @@ export class SortService {
     }
   }
 
-  // Sorts the array with Bubble Sort Algorithm
   onBubbleSort(sortType: string) {
     // Check that the sort has not yet executed
     if(this.timeOuts.length > 0) {
@@ -209,60 +207,6 @@ export class SortService {
     this.intervals.forEach((timeOut) => {
       clearInterval(timeOut);
     });
-  }
-
-  languageSelect(language, sortType) {
-    let languageUrl = "";
-    let languages = document.querySelectorAll(".language");
-    languages.forEach((language) => {
-      // (language as HTMLElement).style.borderBottom = "none";
-      (language as HTMLElement).classList.remove("active-menu");
-    });
-
-    switch (language) {
-      case "cplusplus": {
-        languageUrl =
-          "../../../assets/sample_code/sort/" + sortType + "/cplusplus.PNG";
-        let el = document.querySelector("#cplusplus") as HTMLElement;
-        el.classList.add("active-menu");
-        break;
-      }
-      case "c": {
-        languageUrl = "../../../assets/sample_code/sort/" + sortType + "/c.PNG";
-        let el = document.querySelector("#c") as HTMLElement;
-        el.classList.add("active-menu");
-        break;
-      }
-      case "python": {
-        languageUrl =
-          "../../../assets/sample_code/sort/" + sortType + "/python.PNG";
-        let el = document.querySelector("#python") as HTMLElement;
-        el.classList.add("active-menu");
-        break;
-      }
-      case "java": {
-        languageUrl =
-          "../../../assets/sample_code/sort/" + sortType + "/java.PNG";
-        let el = document.querySelector("#java") as HTMLElement;
-        el.classList.add("active-menu");
-        break;
-      }
-      case "csharp": {
-        languageUrl =
-          "../../../assets/sample_code/sort/" + sortType + "/csharp.PNG";
-        let el = document.querySelector("#csharp") as HTMLElement;
-        el.classList.add("active-menu");
-        break;
-      }
-      case "php": {
-        languageUrl =
-          "../../../assets/sample_code/sort/" + sortType + "/php.PNG";
-        let el = document.querySelector("#php") as HTMLElement;
-        el.classList.add("active-menu");
-        break;
-      }
-    }
-    return languageUrl;
   }
 
   private showReset(sortType: string) {

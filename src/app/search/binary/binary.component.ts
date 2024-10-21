@@ -7,21 +7,16 @@ import { SearchSeervice } from "../search.service";
   styleUrls: ["./binary.component.css", "../search.style.css"],
 })
 export class BinaryComponent implements OnInit, OnDestroy {
-  languageUrl;
 
   constructor(private searchService: SearchSeervice) {}
 
   ngOnInit() {
     this.searchService.populateSortedArray();
     this.searchService.generateBoxes("binary");
-    this.languageUrl = this.searchService.languageSelect("cplusplus", "binary");
   }
 
   ngOnDestroy() {
     this.searchService.killAnimation();
   }
 
-  onLanguageSelect(language) {
-    this.languageUrl = this.searchService.languageSelect(language, "binary");
-  }
 }

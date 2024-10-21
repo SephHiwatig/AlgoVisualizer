@@ -8,19 +8,13 @@ import { SortService } from "../sort.service";
 })
 export class BubbleComponent implements OnInit, OnDestroy {
   constructor(private sortService: SortService) {}
-  languageUrl = "";
 
   ngOnInit() {
     this.sortService.populateArray();
     this.sortService.generateBars("bubble");
-    this.languageUrl = this.sortService.languageSelect("cplusplus", "bubble");
   }
 
   ngOnDestroy() {
     this.sortService.killAnimation();
-  }
-
-  onLanguageSelect(language) {
-    this.languageUrl = this.sortService.languageSelect(language, "bubble");
   }
 }

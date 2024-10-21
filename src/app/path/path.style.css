@@ -20,3 +20,29 @@
   max-width: 60%;
   max-height: 60%;
 }
+
+.algo-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.btnNavigateContainer {
+  flex: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.algo-visual {
+  flex: auto;
+}
+
+.btnNavigateContainer button {
+  height: 40px;
+  width: 100px;
+  background-color: #00308F;
+  color: white;
+  border-radius: 4px;
+  border: none;
+  margin: 4px 0;
+  cursor: pointer;
+}
