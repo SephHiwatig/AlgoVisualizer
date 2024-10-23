@@ -37,6 +37,9 @@ export class BarsComponent implements OnInit, OnDestroy {
           case 'insertion':
             this.onInsertionSort();
             break;
+          case 'quick':
+            this.onQuickSort(0, this.arrayToSort.length - 1);
+            break;
           default:
         }
     
@@ -91,7 +94,7 @@ export class BarsComponent implements OnInit, OnDestroy {
               this.showReset = true;
             }
 
-          }, i * 100)
+          }, i * 50)
         );
 
     }
@@ -176,6 +179,47 @@ export class BarsComponent implements OnInit, OnDestroy {
       );
 
     }, 100)
+
+  }
+
+  private onQuickSort(low: number, high: number) {
+
+    this.timeOuts = [];
+    this.timeOuts.push(
+      setTimeout(() => {
+        if (low < high) {
+          let pivot = this.arrayToSort[high];
+          let i = low - 1;
+          for (var j = low; j < high; j++) {
+            if (this.arrayToSort[j] < pivot) {
+              i++;
+              let temp = this.arrayToSort[i];
+              this.arrayToSort[i] = this.arrayToSort[j];
+              this.arrayToSort[j] = temp;
+            }
+          }
+          let temp1 = this.arrayToSort[i + 1];
+          this.arrayToSort[i + 1] = this.arrayToSort[high];
+          this.arrayToSort[high] = temp1;
+          i = i + 1;
+          
+          this.timeOuts.push(
+            setTimeout(() => {
+              this.onQuickSort(low, i - 1);
+            }, 100)
+          );
+          
+          this.timeOuts.push(
+            setTimeout(() => {
+              this.onQuickSort(i + 1, high);
+            }, 100)
+          )
+
+        } else {
+          this.showReset = true;
+        }
+      })
+    );
 
   }
 

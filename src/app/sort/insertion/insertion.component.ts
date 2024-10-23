@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { SortService } from "../sort.service";
 
 @Component({
   selector: "app-insertion",
