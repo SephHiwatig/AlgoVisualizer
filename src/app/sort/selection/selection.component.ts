@@ -7,14 +7,13 @@ import { SortService } from "../sort.service";
   styleUrls: ["./selection.component.css", "../sort.style.css"],
 })
 export class SelectionComponent implements OnInit, OnDestroy {
-  constructor(private sortService: SortService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.sortService.populateArray();
-    this.sortService.generateBars("selection");
+
   }
 
   ngOnDestroy() {
-    this.sortService.killAnimation();
+
   }
 }

@@ -1,0 +1,9 @@
+<button *ngIf="!showReset" (click)="onSort()" class="btnSort">Sort</button>
+<button *ngIf="showReset" (click)="onReset()" class="btnSort">Reset</button>
+<div
+  *ngFor="let item of arrayToSort"
+  class="bar"
+  [ngStyle]="{
+    height: item + '%'
+  }"
+></div>

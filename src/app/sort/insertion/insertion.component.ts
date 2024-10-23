@@ -8,14 +8,13 @@ import { SortService } from "../sort.service";
 })
 export class InsertionComponent implements OnInit, OnDestroy {
 
-  constructor(private sortService: SortService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.sortService.populateArray();
-    this.sortService.generateBars("insertion");
+
   }
 
   ngOnDestroy() {
-    this.sortService.killAnimation();
+
   }
 }
