@@ -77,7 +77,7 @@ export class BoxesComponent implements OnInit, OnDestroy {
     for (let i = 0; i < boxCount; i++) {
       this.timeOuts.push(
         setTimeout(() => {
-          (boxes[i] as HTMLElement).style.backgroundColor = "#e91e63";
+          (boxes[i] as HTMLElement).style.backgroundColor = "#867839";
           if (i > 0) {
             (boxes[i - 1] as HTMLElement).style.backgroundColor = "#428df5";
           }
@@ -94,6 +94,7 @@ export class BoxesComponent implements OnInit, OnDestroy {
   }
 
   private onBinarySearch() {
+
     const boxes = document.querySelectorAll(".box");
     let min = 0;
     let max = this.arrayToSearch.length - 1;
@@ -102,12 +103,9 @@ export class BoxesComponent implements OnInit, OnDestroy {
     for (let i = 0; i < 5; i++) {
       this.timeOuts.push(
         setTimeout(() => {
-          if (previousMid) {
-            (boxes[previousMid] as HTMLElement).style.backgroundColor = "#000";
-          }
           let mid = Math.floor(min + (max - min) / 2);
           previousMid = mid;
-          (boxes[mid] as HTMLElement).style.backgroundColor = "#e91e63";
+          (boxes[mid] as HTMLElement).style.backgroundColor = "#867839";
           if (this.arrayToSearch[mid] === this.valueToSearch) {
             (boxes[mid] as HTMLElement).style.backgroundColor = "green";
             this.killAnimation();
@@ -127,18 +125,18 @@ export class BoxesComponent implements OnInit, OnDestroy {
     const boxCount = this.arrayToSearch.length;
     let step = Math.floor(Math.sqrt(boxCount));
     let prev = 0;
-    (boxes[prev] as HTMLElement).style.backgroundColor = "#e91e63";
+    (boxes[prev] as HTMLElement).style.backgroundColor = "#867839";
 
     let tempInt = setInterval(() => {
       if (
         this.arrayToSearch[Math.min(step, boxCount) - 1] < this.valueToSearch
       ) {
         prev = step;
-        (boxes[prev] as HTMLElement).style.backgroundColor = "#e91e63";
+        (boxes[prev] as HTMLElement).style.backgroundColor = "#867839";
         step += Math.floor(Math.sqrt(boxCount));
       } else {
         if (boxes[step]) {
-          (boxes[step] as HTMLElement).style.backgroundColor = "#e91e63";
+          (boxes[step] as HTMLElement).style.backgroundColor = "#867839";
         }
         clearInterval(tempInt);
         let tempInt2 = setInterval(() => {

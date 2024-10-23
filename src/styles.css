@@ -13,7 +13,7 @@ body {
 .toolbar {
   height: 60px;
   align-items: center;
-  background-color: #3f51b5;
+  background-color: #394686;
   color: white;
   font-weight: 600;
   position: fixed;
@@ -43,7 +43,7 @@ body {
 .algo-visual {
   height: 100%;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: #dbf1ff;
   border-radius: 4px;
   padding: 0 !important;
   margin: 0 !important;

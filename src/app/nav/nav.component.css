@@ -32,9 +32,10 @@ div span {
 .sub-menu-search,
 .sub-menu-path {
   position: absolute;
-  background-color: #1976d2;
+  background-color: #394686;
   border-radius: 4px;
   display: none;
+  width: 200px;
 }
 
 .sub-menu-sort a,
@@ -45,23 +46,24 @@ div span {
   border-radius: 4px;
   text-decoration: none;
   color: #fff;
+  width: auto;
 }
 
 .sub-menu-sort a:hover,
 .sub-menu-search a:hover,
 .sub-menu-path a:hover {
   display: block;
-  background-color: #218dfa;
+  background-color: #6270a8;
 }
 
 .nav-item-sort:hover,
 .nav-item-search:hover,
 .nav-item-path:hover {
-  background-color: #e91e63;
+  background-color: #6270a8;
 }
 
 .active-link {
-  background-color: #e91e63;
+  background-color: #6270a8;
 }
 
 .nav-item-sort:hover .sub-menu-sort {
