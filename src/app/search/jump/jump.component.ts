@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { SearchSeervice } from "../search.service";
 
 @Component({
   selector: "app-jump",
@@ -8,15 +7,14 @@ import { SearchSeervice } from "../search.service";
 })
 export class JumpComponent implements OnInit, OnDestroy {
 
-  constructor(private searchService: SearchSeervice) {}
+  constructor() {}
 
   ngOnInit() {
-    this.searchService.populateSortedArray();
-    this.searchService.generateBoxes("jump");
+
   }
 
   ngOnDestroy() {
-    this.searchService.killAnimation();
+
   }
 
 }

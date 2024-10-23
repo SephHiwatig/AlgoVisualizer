@@ -17,6 +17,7 @@ import { JumpComponent } from "./search/jump/jump.component";
 import { DijkstraComponent } from "./path/dijkstra/dijkstra.component";
 import { AstarComponent } from "./path/astar/astar.component";
 import { BarsComponent } from "./sort/bars/bars.component";
+import { BoxesComponent } from "./search/boxes/boxes.component";
 
 @NgModule({
   declarations: [
@@ -31,7 +32,8 @@ import { BarsComponent } from "./sort/bars/bars.component";
     JumpComponent,
     DijkstraComponent,
     AstarComponent,
-    BarsComponent
+    BarsComponent,
+    BoxesComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],

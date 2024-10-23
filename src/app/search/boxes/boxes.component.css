@@ -1,0 +1,85 @@
+.box {
+    width: 100px;
+    height: 100px;
+    line-height: 100px;
+    margin: 0 1px;
+    border-radius: 4px;
+    background-color: #428df5;
+    text-align: center !important;
+    vertical-align: middle;
+    font-size: large;
+    color: #fff;
+    font-weight: bold;
+}
+
+.search-btn {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border: none;
+    background-color: #1fa638;
+    color: #fff;
+    border-radius: 4px;
+    cursor: pointer;
+    height: 40px;
+    width: 100px;
+    font-weight: bold;
+}
+
+.search-btn:hover {
+    transform: scale(1.1);
+    transition: 0.1s ease-in-out;
+}
+
+.search-btn:active {
+    background-color: #78c987;
+}
+
+.active-menu {
+    border-bottom: 4px solid #3f51b5;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .box {
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    .box {
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    .box {
+        width: 50px;
+        height: 50px;
+        line-height: 50px;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    .box {
+        width: 60px;
+        height: 60px;
+        line-height: 60px;
+    }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .box {
+         width: 80px;
+         height: 80px;
+         line-height: 80px;
+    }
+}

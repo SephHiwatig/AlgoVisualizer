@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { SearchSeervice } from "../search.service";
 
 @Component({
   selector: "app-linear",
@@ -8,14 +7,13 @@ import { SearchSeervice } from "../search.service";
 })
 export class LinearComponent implements OnInit, OnDestroy {
   
-  constructor(private searchService: SearchSeervice) {}
+  constructor() {}
 
   ngOnInit() {
-    this.searchService.populateArray();
-    this.searchService.generateBoxes("linear");
+
   }
 
   ngOnDestroy() {
-    this.searchService.killAnimation();
+
   }
 }
