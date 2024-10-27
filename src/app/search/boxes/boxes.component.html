@@ -1,12 +1,12 @@
 <button
   *ngIf="!showReset"
   (click)="onSearch()"
-  class="search-btn"
+  class="btnAction"
   [disabled]="searching"
 >
   Search {{ valueToSearch }}
 </button>
 
-<button *ngIf="showReset" (click)="onReset()" class="search-btn">Reset</button>
+<button *ngIf="showReset" (click)="onReset()" class="btnAction">Reset</button>
 
 <div *ngFor="let item of arrayToSearch" class="box">{{ item }}</div>

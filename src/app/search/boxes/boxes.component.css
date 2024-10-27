@@ -13,34 +13,6 @@
     box-shadow: 4px 4px 2px rgb(139, 215, 240);
 }
 
-.search-btn {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    border: none;
-    background-color: #457c97;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    height: 40px;
-    width: 100px;
-    font-weight: bold;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.search-btn:hover {
-    transform: scale(1.1);
-    transition: 0.1s ease-in-out;
-}
-
-.search-btn:active {
-    background-color: #457c97;
-}
-
-.active-menu {
-    border-bottom: 4px solid #3f51b5;
-}
-
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .box {

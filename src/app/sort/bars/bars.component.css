@@ -5,30 +5,3 @@
     min-width: .5%;
     box-shadow: 4px 4px 2px rgb(139, 215, 240);
 }
-
-.btnSort {
-    position: absolute;
-    top: 5px;
-    left: 5px;
-    border: none;
-    background-color: #396d86;
-    color: #fff;
-    border-radius: 4px;
-    cursor: pointer;
-    height: 40px;
-    width: 100px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-}
-
-.btnSort:hover {
-    transform: scale(1.1);
-    transition: 0.1s ease-in-out;
-}
-
-.btnSort:active {
-    background-color: #457c97;
-}
-
-.active-menu {
-    border-bottom: 4px solid #3f51b5;
-}

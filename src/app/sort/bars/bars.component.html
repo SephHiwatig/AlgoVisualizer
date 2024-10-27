@@ -1,5 +1,5 @@
-<button *ngIf="!showReset" (click)="onSort()" class="btnSort">Sort</button>
-<button *ngIf="showReset" (click)="onReset()" class="btnSort">Reset</button>
+<button *ngIf="!showReset" (click)="onSort()" class="btnAction">Sort</button>
+<button *ngIf="showReset" (click)="onReset()" class="btnAction">Reset</button>
 <div
   *ngFor="let item of arrayToSort"
   class="bar"

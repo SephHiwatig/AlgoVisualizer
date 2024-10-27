@@ -6,7 +6,7 @@
 .algo-visual {
   flex: auto;
   display: flex;
-  align-items: center;
+  align-items: center !important;
   justify-content: center;
   flex-direction: column;
 }
