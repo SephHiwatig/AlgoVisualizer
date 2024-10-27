@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { PathService } from "../path.service";
 
 @Component({
   selector: "app-dijkstra",
@@ -8,13 +7,13 @@ import { PathService } from "../path.service";
 })
 export class DijkstraComponent implements OnInit {
   
-  constructor(private pathService: PathService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.pathService.generateGrid();
+    
   }
 
   onSearch() {
-    this.pathService.startDijkstra();
+    
   }
 }

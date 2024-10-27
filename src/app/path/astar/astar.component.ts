@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { PathService } from "../path.service";
 
 @Component({
   selector: "app-astar",
@@ -7,13 +6,11 @@ import { PathService } from "../path.service";
   styleUrls: ["./astar.component.css", "../path.style.css"],
 })
 export class AstarComponent implements OnInit {
-  constructor(private pathService: PathService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.pathService.generateGrid();
   }
 
   onSearch() {
-    this.pathService.startAStar();
   }
 }

@@ -1,0 +1,37 @@
+<div class="grid">
+  <div *ngFor="let row of rows" class="row" draggable="false">
+    <div
+      *ngFor="let col of row.columns"
+      id="{{ row.index + '-' + col.index }}"
+      class="col"
+      draggable="false"
+      (mouseenter)="onCreateWall($event)"
+      (mousedown)="onCreateWall($event)"
+      (dragover)="onDragOver($event)"
+      (drop)="onDrop($event)"
+    >
+      <span
+        id="start"
+        class="startEndPosition node"
+        *ngIf="row.index === 0 && col.index === 0"
+        draggable="true"
+        (dragstart)="onDragStart($event)"
+        (mousedown)="onStopMousePropagation($event)"
+        >S</span
+      >
+      <span
+        id="finish"
+        class="startEndPosition node"
+        *ngIf="row.index === GRID_SIZE - 1 && col.index === GRID_SIZE - 1"
+        draggable="true"
+        (dragstart)="onDragStart($event)"
+        (mousedown)="onStopMousePropagation($event)"
+        >F</span
+      >
+    </div>
+  </div>
+</div>
+<button *ngIf="!showReset" (click)="onSearch()" class="search-btn">
+  Start
+</button>
+<button *ngIf="showReset" (click)="onReset()" class="search-btn">Reset</button>

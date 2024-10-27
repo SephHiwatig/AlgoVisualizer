@@ -18,6 +18,7 @@ import { DijkstraComponent } from "./path/dijkstra/dijkstra.component";
 import { AstarComponent } from "./path/astar/astar.component";
 import { BarsComponent } from "./sort/bars/bars.component";
 import { BoxesComponent } from "./search/boxes/boxes.component";
+import { GridComponent } from "./path/grid/grid.component";
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { BoxesComponent } from "./search/boxes/boxes.component";
     DijkstraComponent,
     AstarComponent,
     BarsComponent,
-    BoxesComponent
+    BoxesComponent,
+    GridComponent
   ],
   imports: [BrowserModule, AppRoutingModule],
   providers: [],
